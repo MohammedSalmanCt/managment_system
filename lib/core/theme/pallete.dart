@@ -9,8 +9,10 @@ class Pallete{
   static const textFieldBorderColor = Color.fromRGBO(227, 227, 227, 1);
   static const loginButtonColor = Color.fromRGBO(26, 90, 215, 1);
   static const textBlueColor = Color.fromRGBO(26, 90, 215, 1);
-  static const dashBoardSelectedColor = Color.fromRGBO(26, 90, 215, 1);
+  static const selectedBlueColor = Color.fromRGBO(26, 90, 215, 1);
   static const dashBoardIconsBackgroundColor = Color.fromRGBO(26, 90, 215, 1);
   static const dashBoardIconsBackgroundBlack = Color.fromRGBO(30, 30, 30, 1);
   static const homeBackgroundColor = Color.fromRGBO(227, 227, 227, 1);
+  static const textGreyColor = Color.fromRGBO(201, 201, 201, 1);
+  static const buttonYellowColor = Color.fromRGBO(251, 176, 64, 1);
 }

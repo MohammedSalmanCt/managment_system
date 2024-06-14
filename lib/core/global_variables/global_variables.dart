@@ -10,6 +10,8 @@ final selectedSideMenuIndexProvider = StateProvider<int>((ref) {
 final headingProvider = StateProvider<String>((ref) {
   return "DashBoard";
 });
+/// function type
+typedef TapCallback = void Function();
 
 
 

@@ -137,7 +137,7 @@ TextEditingController passwordController=TextEditingController();
                                          ),
                                          contentPadding:const EdgeInsetsDirectional.only(top: 8,start: 10),
                                          hintText:"Email",
-                                         hintStyle:  GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),
+                                         hintStyle:  GoogleFonts.poppins(color: Pallete.textGreyColor,fontWeight: FontWeight.w400,),
                                        ),
                                      ),
                                    ),
@@ -167,7 +167,7 @@ TextEditingController passwordController=TextEditingController();
                                                ),
                                                contentPadding: const EdgeInsetsDirectional.only(top: 8,start: 10),
                                                hintText:"Password",
-                                               hintStyle:  GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),
+                                               hintStyle:  GoogleFonts.poppins(color: Pallete.textGreyColor,fontWeight: FontWeight.w400,),
                                                suffixIcon: InkWell(
                                                  hoverColor: Colors.transparent,
                                                  onTap: () {

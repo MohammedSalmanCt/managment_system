@@ -6,7 +6,7 @@ import 'package:managment_system/feature/HomePage/screen/side_menu.dart';
 import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
 import '../../DashBoard/screen/dashboard_screen.dart';
-import '../../product_settings/screen/add_product/desktop_add_product_screen.dart';
+import '../../product_settings/screen/add_product/deskTop/add_product_screen.dart';
 
 class DeskTopHomeScreen extends StatelessWidget {
   const DeskTopHomeScreen({super.key,required this.tabController});
@@ -84,7 +84,14 @@ class DeskTopHomeScreen extends StatelessWidget {
                                   width: 1024,
                                   height: 800,
                                 ),
-                                   DeskTopAddProductScreen(),
+                                    AddProductScreen(
+                                      totalWidth: width*(0.2),
+                                    totalHeight: width*(0.24),
+                                    circleWidth: width*(0.03),
+                                    device: true,
+                                    gap: width*(0.01),
+                                    textSize: width*(0.01),
+                                    textSubSize: width*(0.008),),
                                     Container(
                                   color: Colors.purple,
                                   width: 1024,

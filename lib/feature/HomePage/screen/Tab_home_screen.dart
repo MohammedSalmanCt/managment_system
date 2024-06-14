@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:managment_system/feature/HomePage/screen/side_menu.dart';
+import 'package:managment_system/feature/product_settings/screen/add_product/deskTop/add_product_screen.dart';
 import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
 import '../../DashBoard/screen/dashboard_screen.dart';
@@ -15,6 +15,7 @@ class TabHomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     final heading=ref.watch(headingProvider);
+    print(width);
     return SafeArea(
       child:Scaffold(
         key: _scaffoldKey,
@@ -58,11 +59,13 @@ class TabHomeScreen extends ConsumerWidget {
                 width: 1024,
                 height: 800,
               ),
-              Container(
-                color: Colors.red,
-                width: 1024,
-                height: 800,
-              ),
+              AddProductScreen(device: false,
+              textSubSize: width*(0.015),
+              textSize: width*(0.02),
+              gap: width*(0.01),
+              circleWidth: width*(0.051),
+             totalHeight: width*(0.38),
+              totalWidth: width*(0.42),),
               Container(
                 color: Colors.purple,
                 width: 1024,
