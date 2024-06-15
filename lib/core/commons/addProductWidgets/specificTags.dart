@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../global_variables/global_variables.dart';
 import '../../theme/pallete.dart';
 
-class AddTagContainer extends StatelessWidget {
-  const AddTagContainer({super.key,required this.totalWidth,required this.tagContainerSize,
-  required this.tagTextSize});
+class SpecificTagContainer extends StatelessWidget {
+  const SpecificTagContainer({super.key,required this.totalWidth,required this.tagContainerSize,
+    required this.tagTextSize});
   final double totalWidth;
   final double tagContainerSize;
   final double tagTextSize;
@@ -19,15 +19,15 @@ class AddTagContainer extends StatelessWidget {
       "clothes",
       "bottles"
     ];
-    final selectedTagProvider = StateProvider<String?>((ref) {
+    final selectedSpecificTagProvider = StateProvider<String?>((ref) {
       return null;
     });
     return   Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Add Tag",style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
+        Text("Specific Tags",style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
         Consumer(builder: (context, ref, child3) {
-          final selectedTag=ref.watch(selectedTagProvider);
+          final selectedTag=ref.watch(selectedSpecificTagProvider);
           return Container(
             width: totalWidth,
             height: 50,
@@ -43,15 +43,15 @@ class AddTagContainer extends StatelessWidget {
                   padding:  EdgeInsets.all(width*(0.003)),
                   child: InkWell(
                     onTap: () {
-                      ref.read(selectedTagProvider.notifier).update((state) => tagList[index]);
+                      ref.read(selectedSpecificTagProvider.notifier).update((state) => tagList[index]);
                       print(tagList[index]);
                     },
                     child: Container(
                       width: tagContainerSize,
                       height: height*(0.023),
                       decoration: BoxDecoration(
-                          color: selectedTag==tagList[index]?Pallete.selectedBlueColor:Pallete.homeBackgroundColor,
-                          borderRadius: BorderRadius.circular(5),
+                        color: selectedTag==tagList[index]?Pallete.selectedBlueColor:Pallete.homeBackgroundColor,
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       child: Row(
                         children: [

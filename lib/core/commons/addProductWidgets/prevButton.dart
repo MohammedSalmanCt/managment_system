@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../global_variables/global_variables.dart';
 import '../../theme/pallete.dart';
 
-class NextButton extends StatelessWidget {
-  const NextButton({super.key,required this.device});
+class PrevButton extends StatelessWidget {
+  const PrevButton({super.key,required this.device});
   final bool device;
 
   @override
@@ -20,9 +20,9 @@ class NextButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text("Next",style: GoogleFonts.poppins(fontSize:device?width*(0.01):width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
+          Text("Prev",style: GoogleFonts.poppins(fontSize:device?width*(0.01):width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
           SizedBox(width: 5,),
-          device?Icon(Icons.arrow_forward,color: Pallete.blackColor,size: width*(0.01),)
+          device?Icon(Icons.arrow_back,color: Pallete.blackColor,size: width*(0.01),)
               :SizedBox()
         ],
       ),

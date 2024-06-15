@@ -12,6 +12,7 @@ final headingProvider = StateProvider<String>((ref) {
 });
 /// function type
 typedef TapCallback = void Function();
-
-
-
+/// add product page provider
+final addProductPageProvider = StateProvider((ref) {
+  return 0;
+});

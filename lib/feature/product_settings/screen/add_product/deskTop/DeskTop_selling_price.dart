@@ -3,7 +3,7 @@ import 'package:managment_system/core/commons/addProductWidgets/cooseCurrencyDro
 import 'package:managment_system/core/commons/addProductWidgets/initial_cost.dart';
 import 'package:managment_system/core/commons/addProductWidgets/product_stoct_TextField.dart';
 import 'package:managment_system/core/commons/addProductWidgets/selling_price.dart';
-
+import '../../../../../core/commons/addProductWidgets/selling_price_typeOf_discount.dart';
 import '../../../../../core/global_variables/global_variables.dart';
 
 class DeskTopSellingPrice extends StatefulWidget {
@@ -35,6 +35,11 @@ class _DeskTopSellingPriceState extends State<DeskTopSellingPrice> {
             ProductStockTextField(totalWidth: width*(0.2),),
           ],
         ),
+        SizedBox(height: 20,),
+        SellingPriceTypeOfDiscount(textSize: width*(0.008),
+        gridContainerSize: width*(0.08),crossAxisCount: 5,
+        gridSize: width*(0.435),gridSpacing: width*(0.01),
+        gridTextPadding: width*(0.008),),
         SizedBox(height: 30,),
       ],);
   }

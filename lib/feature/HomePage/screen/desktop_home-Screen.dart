@@ -86,7 +86,7 @@ class DeskTopHomeScreen extends StatelessWidget {
                                 ),
                                     AddProductScreen(
                                       totalWidth: width*(0.2),
-                                    totalHeight: width*(0.24),
+                                    totalHeight: width*(0.31),
                                     circleWidth: width*(0.03),
                                     device: true,
                                     gap: width*(0.01),

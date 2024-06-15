@@ -17,10 +17,6 @@ class MyApp extends StatelessWidget {
     height=MediaQuery.of(context).size.height;
     return MaterialApp(
       title: 'Proposal Managment Admin',
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      //   useMaterial3: true,
-      // ),
       home:  LoginScreen(),
       debugShowCheckedModeBanner: false,
     );

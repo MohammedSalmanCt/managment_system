@@ -64,7 +64,7 @@ class TabHomeScreen extends ConsumerWidget {
               textSize: width*(0.02),
               gap: width*(0.01),
               circleWidth: width*(0.051),
-             totalHeight: width*(0.38),
+             totalHeight: width*(0.5),
               totalWidth: width*(0.42),),
               Container(
                 color: Colors.purple,

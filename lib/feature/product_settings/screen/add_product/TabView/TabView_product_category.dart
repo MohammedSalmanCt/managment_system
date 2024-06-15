@@ -17,7 +17,7 @@ class TabViewProductCategory extends StatelessWidget {
         SizedBox(height: 20,),
         AddCategoryDropDwn(totalWidth: width*(0.5),),
         SizedBox(height: 20,),
-        AddTagContainer(totalWidth: width*(0.5),),
+        AddTagContainer(totalWidth: width*(0.5),tagContainerSize: width*(0.08),tagTextSize: width*(0.01),),
         SizedBox(height: 20,),
         CreateCategoryButton(onTap: (){},),
         SizedBox(height: 20,),

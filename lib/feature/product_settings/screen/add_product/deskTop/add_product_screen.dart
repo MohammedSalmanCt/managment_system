@@ -6,16 +6,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:managment_system/feature/product_settings/screen/add_product/deskTop/DeskTop_selling_price.dart';
 import 'package:managment_system/feature/product_settings/screen/add_product/deskTop/product_category.dart';
+import 'package:managment_system/feature/product_settings/screen/add_product/deskTop/product_gallery.dart';
 import '../../../../../core/commons/addProductWidgets/nextButton.dart';
+import '../../../../../core/commons/addProductWidgets/prevButton.dart';
 import '../../../../../core/global_variables/global_variables.dart';
 import '../../../../../core/theme/pallete.dart';
 import '../TabView/TabView_product_category.dart';
+import '../TabView/TabView_selling_price.dart';
+import 'DeskTop_advance.dart';
 import 'add_product_details.dart';
 
-/// add product page provider
-final addProductPageProvider = StateProvider((ref) {
-  return 0;
-});
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key,required this.device,required this.gap,required this.textSubSize,required this.circleWidth,
   required this.textSize,required this.totalHeight,required this.totalWidth});
@@ -31,7 +31,7 @@ class AddProductScreen extends StatefulWidget {
   State<AddProductScreen> createState() => _AddProductScreenState();
 }
 
-class _AddProductScreenState extends State<AddProductScreen> {
+class _AddProductScreenState extends State<AddProductScreen> with SingleTickerProviderStateMixin{
   /// add product page names
   List addProductList=[
     {
@@ -48,6 +48,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
       "Product Gallery":"Thumbnail & add product gallery"
     },
   ];
+  /// advance section tabController
+  TabController? tabController;
+  @override
+  void initState() {
+    tabController=TabController(length:3 , vsync: this,initialIndex: 0);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer(
@@ -59,13 +66,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
           width: width,
           child: Row(
             children: [
-              Container(
+              SizedBox(
                 width: widget.totalWidth,
                 height:widget.totalHeight,
                 child:Align(
                   alignment: Alignment.center,
                   child: ListView.builder(
-                    itemCount:4,
+                    itemCount:addProductList.length,
                     itemBuilder:(context, index) {
                       var entry = addProductList[index].entries.first;
                       String key = entry.key;
@@ -90,7 +97,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                     )
                                 ),
                               ),
-                              index!=3?SizedBox(
+                              index!=4?SizedBox(
                                   height: 40,
                                   child: DottedLine(
                                     direction: Axis.vertical,
@@ -145,14 +152,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             :TabViewProductCategory()):
                     addProductPageIndex==2?SizedBox(
                       child: widget.device?DeskTopSellingPrice()
-                      :SizedBox(),
+                      :TabViewSellingPrice(),
                     )
-                    :SizedBox(),
+                    :addProductPageIndex==3?SizedBox(
+                      child: DeskTopAdvance(device: widget.device,tabController: tabController!,)
+                    )
+                    :ProductGallery(),
                     SizedBox(height: 20,),
                     Divider(color: Pallete.textFieldBorderColor,
                       thickness: 1,
                     ),
-                    SizedBox(height: 15,),
+                    // SizedBox(height: 15,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -161,15 +171,35 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         Spacer(),
                         InkWell(
                             onTap: () {
-                              ref.read(addProductPageProvider.notifier).update((state) => addProductPageIndex-1);
-                            },
-                            child: NextButton(text: "Prev", icon: Icons.arrow_back,device: widget.device,)),
+                              if(addProductPageIndex > 0){
+                              if (addProductPageIndex == 3 &&
+                                  tabController!.index > 0) {
+                                tabController
+                                    ?.animateTo(tabController!.index - 1);
+                              } else {
+                                ref
+                                    .read(addProductPageProvider.notifier)
+                                    .update((state) => addProductPageIndex - 1);
+                              }
+                            }
+                          },
+                            child: PrevButton(device: widget.device,)),
                         SizedBox(width: widget.gap,),
                         InkWell(
                             onTap: () {
-                              ref.read(addProductPageProvider.notifier).update((state) => addProductPageIndex+1);
-                            },
-                            child: NextButton(text: "Next", icon: Icons.arrow_forward,device: widget.device,))
+                              if(addProductPageIndex<4){
+                              if (addProductPageIndex == 3 &&
+                                  tabController!.index < 2) {
+                                tabController
+                                    ?.animateTo(tabController!.index + 1);
+                              } else {
+                                ref
+                                    .read(addProductPageProvider.notifier)
+                                    .update((state) => addProductPageIndex + 1);
+                              }
+                            }
+                          },
+                            child: NextButton(device: widget.device,))
                       ],
                     )
                   ],),

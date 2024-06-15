@@ -26,7 +26,7 @@ class _AddProductCategoryState extends State<AddProductCategory> {
          children: [
            AddCategoryDropDwn(totalWidth: width*(0.2),),
            Spacer(),
-           AddTagContainer(totalWidth: width*(0.2),)
+           AddTagContainer(totalWidth: width*(0.2),tagTextSize: width*(0.008),tagContainerSize: width*(0.044),)
          ],
        ),
         SizedBox(height: 20,),
