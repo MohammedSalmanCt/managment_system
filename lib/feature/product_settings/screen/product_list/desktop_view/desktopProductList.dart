@@ -6,8 +6,7 @@ import '../../../../../core/global_variables/global_variables.dart';
 import '../../../../../core/theme/pallete.dart';
 
 class DeskTopProductList extends StatefulWidget {
-  const DeskTopProductList({super.key,required this.device});
-  final bool device;
+  const DeskTopProductList({super.key,});
   
 
   @override
@@ -18,8 +17,7 @@ class _DeskTopProductListState extends State<DeskTopProductList> {
   TextEditingController searchController=TextEditingController();
   @override
   Widget build(BuildContext context) {
-    TextStyle headingRowStyle=GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,fontSize:widget.device
-        ?width*(0.01):width*(0.013));
+    TextStyle headingRowStyle=GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,fontSize:width*(0.01));
     return Container(
       width: width,
       child:  Theme(
@@ -34,7 +32,7 @@ class _DeskTopProductListState extends State<DeskTopProductList> {
           rowsPerPage: 8,
           headingRowColor: MaterialStateProperty.all(Pallete.homeBackgroundColor),
           arrowHeadColor: Pallete.blackColor,
-          dataRowHeight: widget.device?height*(0.068):height*(0.08),
+          dataRowHeight: height*(0.068),
           horizontalMargin: 5,
           columns:  [
              DataColumn(
@@ -95,14 +93,14 @@ class _DeskTopProductListState extends State<DeskTopProductList> {
                 )),
             DataColumn(
                 label: Container(
-                  width: width*(0.042),
+                  width: width*(0.035),
                   child: Text(
                     "Action",
                     style:headingRowStyle,
                   ),
                 )),
           ],
-          source: DeskTopProductListRow(context: context,device: widget.device),
+          source: DeskTopProductListRow(context: context),
         ),
       ),
     );
@@ -111,9 +109,8 @@ class _DeskTopProductListState extends State<DeskTopProductList> {
 /// product List Data Row
 class DeskTopProductListRow extends DataTableSource {
   final BuildContext context;
-  final bool device;
 
-  DeskTopProductListRow({required this.context,required this.device});
+  DeskTopProductListRow({required this.context,});
 
   @override
   // TODO: implement isRowCountApproximate
@@ -128,8 +125,7 @@ class DeskTopProductListRow extends DataTableSource {
   int get selectedRowCount => 0;
   @override
   DataRow getRow(int index) {
-    TextStyle rowTextStyle=GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,fontSize:device?width*(0.008)
-    :width*(0.01));
+    TextStyle rowTextStyle=GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,fontSize:width*(0.008));
     return DataRow(
       onSelectChanged: (value) {
         Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetails(),));
@@ -213,7 +209,7 @@ class DeskTopProductListRow extends DataTableSource {
           ),
           DataCell(
               Container(
-                width: width*(0.04),
+                width: width*(0.035),
                 child: Row(
                   children: [
                     InkWell(

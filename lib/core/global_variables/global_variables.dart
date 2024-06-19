@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -25,3 +26,5 @@ final addProductPageProvider = StateProvider((ref) {
 final imagePickProvider = StateProvider<List<XFile>>((ref) {
   return [];
 });
+/// product search controller
+TextEditingController searchController=TextEditingController();

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:managment_system/feature/product_settings/screen/product_list/desktop_view/desktopProductList.dart';
+import 'package:managment_system/feature/product_settings/screen/product_list/tablet_view/tabProduct_list.dart';
 import '../../../../../core/theme/pallete.dart';
 import '../../../../core/global_variables/global_variables.dart';
 
@@ -77,7 +78,8 @@ class _ProductListState extends State<ProductList> {
             ],
           ),
           SizedBox(height: 5,),
-         DeskTopProductList(device: widget.device,)
+        widget.device? DeskTopProductList()
+            :TabViewProductList()
         ],
       ),
     );
