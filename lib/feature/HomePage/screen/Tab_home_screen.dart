@@ -6,6 +6,7 @@ import 'package:managment_system/feature/product_settings/screen/add_product/des
 import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
 import '../../DashBoard/screen/dashboard_screen.dart';
+import '../../product_settings/screen/product_list/product_list.dart';
 
 class TabHomeScreen extends ConsumerWidget {
   const TabHomeScreen({super.key,required this.tabController});
@@ -65,12 +66,13 @@ class TabHomeScreen extends ConsumerWidget {
               gap: width*(0.01),
               circleWidth: width*(0.051),
              totalHeight: width*(0.5),
-              totalWidth: width*(0.42),),
+              totalWidth: width*(0.42),
+              tabController: tabController,),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ProductList(tabController: tabController,device: false,),
+          ),
               Container(
-                color: Colors.purple,
-                width: 1024,
-                height: 800,
-              ), Container(
                 color: Colors.black,
                 width: 1024,
                 height: 800,

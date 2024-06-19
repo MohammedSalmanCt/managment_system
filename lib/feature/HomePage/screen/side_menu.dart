@@ -17,9 +17,7 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> {
-  final selectedSideMenuSubIndexProvider = StateProvider<int>((ref) {
-    return 0;
-  });
+
   @override
   Widget build(BuildContext context) {
     TextStyle textStyle= GoogleFonts.poppins(color: Pallete.whiteColor,fontWeight: FontWeight.w200,);

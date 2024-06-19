@@ -4,8 +4,9 @@ import '../../global_variables/global_variables.dart';
 import '../../theme/pallete.dart';
 
 class NextButton extends StatelessWidget {
-  const NextButton({super.key,required this.device});
+  const NextButton({super.key,required this.device,required this.text});
   final bool device;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class NextButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text("Next",style: GoogleFonts.poppins(fontSize:device?width*(0.01):width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
+          Text(text,style: GoogleFonts.poppins(fontSize:device?width*(0.01):width*(0.013),color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
           SizedBox(width: 5,),
           device?Icon(Icons.arrow_forward,color: Pallete.blackColor,size: width*(0.01),)
               :SizedBox()

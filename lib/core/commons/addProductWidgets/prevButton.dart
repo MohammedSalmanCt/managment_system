@@ -20,10 +20,10 @@ class PrevButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text("Prev",style: GoogleFonts.poppins(fontSize:device?width*(0.01):width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
-          SizedBox(width: 5,),
           device?Icon(Icons.arrow_back,color: Pallete.blackColor,size: width*(0.01),)
-              :SizedBox()
+              :SizedBox(),
+          SizedBox(width: 5,),
+          Text("Prev",style: GoogleFonts.poppins(fontSize:device?width*(0.01):width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
         ],
       ),
     );

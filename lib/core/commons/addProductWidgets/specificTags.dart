@@ -54,6 +54,7 @@ class SpecificTagContainer extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(tagList[index],style: GoogleFonts.poppins(fontSize:tagTextSize,color: Pallete.blackColor,),),
                           Icon(Icons.clear,size:tagTextSize,color:Pallete.blackColor)

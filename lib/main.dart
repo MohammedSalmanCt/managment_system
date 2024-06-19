@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:managment_system/core/theme/pallete.dart';
 import 'core/global_variables/global_variables.dart';
 import 'feature/authentication/screen/login_screen.dart';
 

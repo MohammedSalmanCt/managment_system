@@ -18,7 +18,7 @@ import 'add_product_details.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key,required this.device,required this.gap,required this.textSubSize,required this.circleWidth,
-  required this.textSize,required this.totalHeight,required this.totalWidth});
+  required this.textSize,required this.totalHeight,required this.totalWidth,required this.tabController});
   final double totalWidth;
   final double totalHeight;
   final double circleWidth;
@@ -26,6 +26,8 @@ class AddProductScreen extends StatefulWidget {
   final double textSubSize;
   final double gap;
   final bool device;
+  final TabController tabController;
+
 
   @override
   State<AddProductScreen> createState() => _AddProductScreenState();
@@ -62,6 +64,7 @@ class _AddProductScreenState extends State<AddProductScreen> with SingleTickerPr
         final addProductPageIndex=ref.watch(addProductPageProvider);
         print(addProductPageIndex);
         return Container(
+          height: 500,
           color: Pallete.whiteColor,
           width: width,
           child: Row(
@@ -157,7 +160,7 @@ class _AddProductScreenState extends State<AddProductScreen> with SingleTickerPr
                     :addProductPageIndex==3?SizedBox(
                       child: DeskTopAdvance(device: widget.device,tabController: tabController!,)
                     )
-                    :ProductGallery(),
+                    :ProductGallery(device: widget.device,),
                     SizedBox(height: 20,),
                     Divider(color: Pallete.textFieldBorderColor,
                       thickness: 1,
@@ -196,10 +199,17 @@ class _AddProductScreenState extends State<AddProductScreen> with SingleTickerPr
                                 ref
                                     .read(addProductPageProvider.notifier)
                                     .update((state) => addProductPageIndex + 1);
+                                print(addProductPageIndex);
                               }
                             }
+                              else{
+                                widget.tabController.animateTo(6);
+                                ref.read(selectedSideMenuIndexProvider.notifier).update((state) => 5);
+                                ref.read(selectedSideMenuSubIndexProvider.notifier).update((state) => 2);
+                                ref.read(headingProvider.notifier).update((state) => "Product List");
+                              }
                           },
-                            child: NextButton(device: widget.device,))
+                            child: NextButton(device: widget.device,text: addProductPageIndex==4?"Submit":"Next",))
                       ],
                     )
                   ],),

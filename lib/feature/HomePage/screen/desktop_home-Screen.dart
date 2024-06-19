@@ -7,6 +7,7 @@ import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
 import '../../DashBoard/screen/dashboard_screen.dart';
 import '../../product_settings/screen/add_product/deskTop/add_product_screen.dart';
+import '../../product_settings/screen/product_list/product_list.dart';
 
 class DeskTopHomeScreen extends StatelessWidget {
   const DeskTopHomeScreen({super.key,required this.tabController});
@@ -26,7 +27,7 @@ class DeskTopHomeScreen extends StatelessWidget {
                     return Container  (
                       color: Pallete.backgroundColor,
                       child: Padding(
-                        padding:  EdgeInsets.fromLTRB(20,35,25,20),
+                        padding:  EdgeInsets.fromLTRB(20,35,25,0),
                         child:Column(
                           children: [
                             Row(
@@ -58,7 +59,7 @@ class DeskTopHomeScreen extends StatelessWidget {
                             const SizedBox(height: 30,),
                             SingleChildScrollView(
                               child: SizedBox(
-                                height: 500,
+                                height: 580,
                                 child: TabBarView(
                                   controller: tabController,
                                   physics: NeverScrollableScrollPhysics(),
@@ -85,6 +86,7 @@ class DeskTopHomeScreen extends StatelessWidget {
                                   height: 800,
                                 ),
                                     AddProductScreen(
+                                      tabController: tabController,
                                       totalWidth: width*(0.2),
                                     totalHeight: width*(0.31),
                                     circleWidth: width*(0.03),
@@ -92,11 +94,8 @@ class DeskTopHomeScreen extends StatelessWidget {
                                     gap: width*(0.01),
                                     textSize: width*(0.01),
                                     textSubSize: width*(0.008),),
+                                    ProductList(tabController: tabController,device: true,),
                                     Container(
-                                  color: Colors.purple,
-                                  width: 1024,
-                                  height: 800,
-                                ), Container(
                                   color: Colors.black,
                                   width: 1024,
                                   height: 800,
