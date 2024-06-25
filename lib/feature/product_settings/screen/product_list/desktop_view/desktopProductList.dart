@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:managment_system/feature/product_settings/screen/product_list/desktop_view/product_details.dart';
+import 'package:managment_system/feature/product_settings/screen/product_list/desktop_view/deskTop_product_details.dart';
 import '../../../../../core/global_variables/global_variables.dart';
 import '../../../../../core/theme/pallete.dart';
+import '../product_details.dart';
 
 class DeskTopProductList extends StatefulWidget {
   const DeskTopProductList({super.key,});
@@ -39,7 +40,7 @@ class _DeskTopProductListState extends State<DeskTopProductList> {
                 label: Container(
                   width: width*(0.12),
                   child: Text(
-                    'Add Product Details',
+                    'Product Details',
                     style:headingRowStyle,
                   ),
                 )),

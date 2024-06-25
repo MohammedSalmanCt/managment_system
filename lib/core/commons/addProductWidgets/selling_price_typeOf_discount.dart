@@ -25,9 +25,9 @@ class _SellingPriceTypeOfDiscountState extends State<SellingPriceTypeOfDiscount>
   List<String> typeOfDiscounts=[
     "Fixed Price",
     "Buy 1 Get 1",
-    "Seasonal or Holiday Discount",
-    "Percentage-based Discount",
-    "Volume or Bulk Discount"
+    // "Seasonal or Holiday Discount",
+    // "Percentage-based Discount",
+    // "Volume or Bulk Discount"
   ];
   ///  type of product discount  provider
   final typeDiscountProvider = StateProvider<String?>((ref) {

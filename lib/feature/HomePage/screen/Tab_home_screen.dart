@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:managment_system/feature/HomePage/screen/side_menu.dart';
-import 'package:managment_system/feature/product_settings/screen/add_product/deskTop/add_product_screen.dart';
+import 'package:managment_system/feature/product_settings/screen/add_product/add_product_screen.dart';
 import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
 import '../../DashBoard/screen/dashboard_screen.dart';
@@ -56,6 +56,16 @@ class TabHomeScreen extends ConsumerWidget {
                 height: 800,
               ),
               Container(
+                color: Colors.lightGreen,
+                width: 1024,
+                height: 800,
+              ),
+              Container(
+                color: Colors.yellow,
+                width: 1024,
+                height: 800,
+              ),
+              Container(
                 color: Colors.red,
                 width: 1024,
                 height: 800,
@@ -86,18 +96,6 @@ class TabHomeScreen extends ConsumerWidget {
                 height: 800,
               ), Container(
                 color: Colors.amber,
-                width: 1024,
-                height: 800,
-              ), Container(
-                color: Colors.brown,
-                width: 1024,
-                height: 800,
-              ), Container(
-                color: Colors.lightGreenAccent,
-                width: 1024,
-                height: 800,
-              ), Container(
-                color: Colors.teal,
                 width: 1024,
                 height: 800,
               ),

@@ -35,7 +35,7 @@ class _RestockDateState extends State<RestockDate> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Publish Date & Time",style: GoogleFonts.poppins(fontSize:widget.textSize,color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
+        Text("Restock Date",style: GoogleFonts.poppins(fontSize:widget.textSize,color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
         Consumer(builder: (context, ref, child3) {
           final date=ref.watch(restockDateProvider);
           return InkWell(

@@ -1,19 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:managment_system/core/constants/firebase_constants.dart';
 import 'package:managment_system/feature/product_settings/screen/add_product/deskTop/DeskTop_selling_price.dart';
 import 'package:managment_system/feature/product_settings/screen/add_product/deskTop/product_category.dart';
-import 'package:managment_system/feature/product_settings/screen/add_product/deskTop/product_gallery.dart';
-import '../../../../../core/commons/addProductWidgets/nextButton.dart';
-import '../../../../../core/commons/addProductWidgets/prevButton.dart';
-import '../../../../../core/global_variables/global_variables.dart';
-import '../../../../../core/theme/pallete.dart';
-import '../TabView/TabView_product_category.dart';
-import '../TabView/TabView_selling_price.dart';
-import 'DeskTop_advance.dart';
+import 'package:managment_system/feature/product_settings/screen/add_product/product_gallery.dart';
+import 'package:managment_system/model/admin_model.dart';
+import '../../../../core/commons/addProductWidgets/nextButton.dart';
+import '../../../../core/commons/addProductWidgets/prevButton.dart';
+import '../../../../core/global_variables/global_variables.dart';
+import '../../../../core/theme/pallete.dart';
+import 'TabView/TabView_product_category.dart';
+import 'TabView/TabView_selling_price.dart';
+import 'deskTop/DeskTop_advance.dart';
 import 'add_product_details.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -52,9 +55,11 @@ class _AddProductScreenState extends State<AddProductScreen> with SingleTickerPr
   ];
   /// advance section tabController
   TabController? tabController;
+
   @override
   void initState() {
-    tabController=TabController(length:3 , vsync: this,initialIndex: 0);
+    tabController=TabController(length:2, vsync: this);
+
     super.initState();
   }
   @override
@@ -192,7 +197,7 @@ class _AddProductScreenState extends State<AddProductScreen> with SingleTickerPr
                             onTap: () {
                               if(addProductPageIndex<4){
                               if (addProductPageIndex == 3 &&
-                                  tabController!.index < 2) {
+                                  tabController!.index < 1) {
                                 tabController
                                     ?.animateTo(tabController!.index + 1);
                               } else {
@@ -203,8 +208,8 @@ class _AddProductScreenState extends State<AddProductScreen> with SingleTickerPr
                               }
                             }
                               else{
-                                widget.tabController.animateTo(6);
-                                ref.read(selectedSideMenuIndexProvider.notifier).update((state) => 5);
+                                widget.tabController.animateTo(4);
+                                ref.read(selectedSideMenuIndexProvider.notifier).update((state) => 4);
                                 ref.read(selectedSideMenuSubIndexProvider.notifier).update((state) => 2);
                                 ref.read(headingProvider.notifier).update((state) => "Product List");
                               }

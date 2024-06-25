@@ -26,7 +26,7 @@ class _DeskTopAdvanceState extends State<DeskTopAdvance> {
     width=MediaQuery.of(context).size.width;
     height=MediaQuery.of(context).size.height;
     return  DefaultTabController(
-      length: 3,
+      length: 2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -46,10 +46,11 @@ class _DeskTopAdvanceState extends State<DeskTopAdvance> {
                 ),Text(
                   "Additional Options",
                     style: GoogleFonts.poppins(fontSize:widget.device?width*(0.01):width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w400,)
-                ),Text(
-                  "Shipping",
-                    style: GoogleFonts.poppins(fontSize:widget.device?width*(0.01):width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w400,)
                 ),
+                // Text(
+                //   "Shipping",
+                //     style: GoogleFonts.poppins(fontSize:widget.device?width*(0.01):width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w400,)
+                // ),
               ]),
           SizedBox(height: 20,),
          widget.device?  SizedBox(
@@ -60,7 +61,7 @@ class _DeskTopAdvanceState extends State<DeskTopAdvance> {
               children:const [
               DeskTopInventory(),
                 DeskTopAdditionalOption(),
-                DeskTopShipping(),
+                // DeskTopShipping(),
             ],),
           )
           : SizedBox(
@@ -71,7 +72,7 @@ class _DeskTopAdvanceState extends State<DeskTopAdvance> {
              children:const [
                TabViewInventory(),
                TabViewAdditionalOption(),
-               TabViewShipping(),
+               // TabViewShipping(),
              ],),
          ),
           SizedBox(height: 10,),

@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:managment_system/feature/product_settings/screen/product_list/desktop_view/product_details.dart';
+import 'package:managment_system/feature/product_settings/screen/product_list/tablet_view/tabView_product_details.dart';
 import '../../../../../core/global_variables/global_variables.dart';
 import '../../../../../core/theme/pallete.dart';
+import '../product_details.dart';
 
 class TabViewProductList extends StatefulWidget {
   const TabViewProductList({super.key,});
@@ -17,7 +18,7 @@ class _TabViewProductListState extends State<TabViewProductList> {
   @override
   Widget build(BuildContext context) {
     TextStyle headingRowStyle=GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,fontSize:width*(0.012));
-    return Container(
+    return SizedBox(
       width: width,
       height: 750,
       child:  Theme(
@@ -39,7 +40,7 @@ class _TabViewProductListState extends State<TabViewProductList> {
                 label: Container(
                   width: width*(0.15),
                   child: Text(
-                    'Add Product Details',
+                    'Product Details',
                     style:headingRowStyle,
                   ),
                 )),

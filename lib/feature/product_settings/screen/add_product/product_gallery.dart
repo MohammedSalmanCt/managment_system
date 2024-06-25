@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:managment_system/core/global_variables/global_variables.dart';
-import '../../../../../core/theme/pallete.dart';
+import '../../../../core/theme/pallete.dart';
 import 'dart:html' as html;
 
 

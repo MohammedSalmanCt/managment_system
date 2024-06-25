@@ -25,7 +25,7 @@ class AddTagContainer extends StatelessWidget {
     return   Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Add Tag",style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
+        Text("Add SubCategory",style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
         Consumer(builder: (context, ref, child3) {
           final selectedTag=ref.watch(selectedTagProvider);
           return Container(

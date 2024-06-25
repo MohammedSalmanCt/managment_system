@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:managment_system/core/global_variables/global_variables.dart';
 import '../../../../../core/commons/addProductWidgets/addCategoryDropDown.dart';
 import '../../../../../core/commons/addProductWidgets/addTagContainer.dart';
 import '../../../../../core/commons/addProductWidgets/createCategoryButton.dart';
 import '../../../../../core/commons/addProductWidgets/publishDateAndTime.dart';
 import '../../../../../core/commons/addProductWidgets/publishStatusDropDown.dart';
+import '../addCategoryAlert.dart';
 
 class AddProductCategory extends StatefulWidget {
   const AddProductCategory({super.key});
@@ -30,7 +32,13 @@ class _AddProductCategoryState extends State<AddProductCategory> {
          ],
        ),
         SizedBox(height: 20,),
-        CreateCategoryButton(onTap: (){},),
+        Consumer(
+          builder: (context,ref,child) {
+            return CreateCategoryButton(onTap: (){
+              addCategoryAlertBox(context: context,ref: ref);
+            },);
+          }
+        ),
         SizedBox(height: 20,),
         Row(
           children: [

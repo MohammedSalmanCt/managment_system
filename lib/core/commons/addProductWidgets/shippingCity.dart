@@ -26,7 +26,7 @@ class _ShippingCityTextFieldState extends State<ShippingCityTextField> {
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               hintText: "City",
-              hintStyle:  GoogleFonts.poppins(color: Pallete.textGreyColor,fontWeight: FontWeight.w400,),
+              hintStyle:  GoogleFonts.poppins(color: Pallete.textGreyColor,fontWeight: FontWeight.w200,),
               enabledBorder:const OutlineInputBorder(
                 borderSide:  BorderSide(
                     color: Pallete.textFieldBorderColor),

@@ -19,4 +19,5 @@ class Pallete{
   static const inStockButtonColor = Color.fromRGBO(202, 255, 201, 1);
   static const starFillColor = Color.fromRGBO(255, 190, 92, 1);
   static const starNonFillColor = Color.fromRGBO(174, 171, 171, 1);
+  static const textGreenColor = Color.fromRGBO(83, 167, 82, 1);
 }

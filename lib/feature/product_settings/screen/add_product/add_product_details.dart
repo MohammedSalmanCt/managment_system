@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:managment_system/core/global_variables/global_variables.dart';
-import '../../../../../core/theme/pallete.dart';
+import '../../../../core/theme/pallete.dart';
 
 class AddProductDetails extends StatefulWidget {
   const AddProductDetails({super.key,required this.hintTextSize,required this.productDetailsTextFieldHeight,

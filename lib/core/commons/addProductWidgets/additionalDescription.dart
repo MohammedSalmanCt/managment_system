@@ -19,10 +19,10 @@ class _AdditionalDescriptionTextFieldState extends State<AdditionalDescriptionTe
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Additional Tag Title",style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
+        Text("Additional Description",style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
         SizedBox(
           width:widget.totalWidth,
-          height: 150,
+          height: 145,
           child: TextFormField(
             controller: additionalTagTitle,
             style:  GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),

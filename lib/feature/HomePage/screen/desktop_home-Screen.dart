@@ -6,7 +6,7 @@ import 'package:managment_system/feature/HomePage/screen/side_menu.dart';
 import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
 import '../../DashBoard/screen/dashboard_screen.dart';
-import '../../product_settings/screen/add_product/deskTop/add_product_screen.dart';
+import '../../product_settings/screen/add_product/add_product_screen.dart';
 import '../../product_settings/screen/product_list/product_list.dart';
 
 class DeskTopHomeScreen extends StatelessWidget {
@@ -81,6 +81,16 @@ class DeskTopHomeScreen extends StatelessWidget {
                                   height: 800,
                                 ),
                                     Container(
+                                  color: Colors.lightGreen,
+                                  width: 1024,
+                                  height: 800,
+                                ),
+                                    Container(
+                                  color: Colors.yellow,
+                                  width: 1024,
+                                  height: 800,
+                                ),
+                                    Container(
                                   color: Colors.red,
                                   width: 1024,
                                   height: 800,
@@ -109,18 +119,6 @@ class DeskTopHomeScreen extends StatelessWidget {
                                   height: 800,
                                 ), Container(
                                   color: Colors.amber,
-                                  width: 1024,
-                                  height: 800,
-                                ), Container(
-                                  color: Colors.brown,
-                                  width: 1024,
-                                  height: 800,
-                                ), Container(
-                                  color: Colors.lightGreenAccent,
-                                  width: 1024,
-                                  height: 800,
-                                ), Container(
-                                  color: Colors.teal,
                                   width: 1024,
                                   height: 800,
                                 ),

@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:managment_system/core/theme/pallete.dart';
 import 'core/global_variables/global_variables.dart';
 import 'feature/authentication/screen/login_screen.dart';
+import 'feature/authentication/screen/spash_screen.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -18,7 +24,7 @@ class MyApp extends StatelessWidget {
     height=MediaQuery.of(context).size.height;
     return MaterialApp(
       title: 'Proposal Managment Admin',
-      home:  LoginScreen(),
+      home:  SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

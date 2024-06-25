@@ -34,7 +34,7 @@ class _DimensionHeightTextFieldState extends State<DimensionHeightTextField> {
             ],
             decoration: InputDecoration(
               hintText: "Height[h]",
-              hintStyle:  GoogleFonts.poppins(color: Pallete.textGreyColor,fontWeight: FontWeight.w400,),
+              hintStyle:  GoogleFonts.poppins(color: Pallete.textGreyColor,fontWeight: FontWeight.w200,),
               enabledBorder:const OutlineInputBorder(
                 borderSide:  BorderSide(
                     color: Pallete.textFieldBorderColor),

@@ -17,7 +17,7 @@ class _ProductStockTextFieldState extends State<ProductStockTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Selling Price *",style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
+        Text("Product Stocks",style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
         SizedBox(
           width:widget.totalWidth,
           height: 50,
