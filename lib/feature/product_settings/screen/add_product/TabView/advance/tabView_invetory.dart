@@ -9,8 +9,9 @@ import '../../../../../../core/commons/addProductWidgets/lowStock_dropDown.dart'
 import '../../../../../../core/commons/addProductWidgets/stock_availability_DropDown.dart';
 
 class TabViewInventory extends StatefulWidget {
-  const TabViewInventory({super.key});
-
+  const TabViewInventory({super.key,required this.skuController,required this.stockQuantityController});
+  final TextEditingController skuController;
+  final TextEditingController stockQuantityController;
   @override
   State<TabViewInventory> createState() => _TabViewInventoryState();
 }
@@ -23,21 +24,21 @@ class _TabViewInventoryState extends State<TabViewInventory> {
       children: [
         StockAvailabilityDropDown(totalWidth: width*(0.5),),
         SizedBox(height: 10,),
-        LowStockDropDown(totalWidth: width*(0.5),),
-        SizedBox(height: 10,),
+        // LowStockDropDown(totalWidth: width*(0.5),),
+        // SizedBox(height: 10,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SkuTextField(totalWidth: width*(0.22),textSize: width*(0.015),),
-            StockQuantityTextField(totalWidth: width*(0.22),textSize: width*(0.015)),
+            SkuTextField(totalWidth: width*(0.22),textSize: width*(0.015),skuController: widget.skuController,),
+            StockQuantityTextField(totalWidth: width*(0.22),textSize: width*(0.015),stockQuantityController: widget.stockQuantityController,),
           ],
         ),
         SizedBox(height: 10,),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
         RestockDate(totalWidth: width*(0.22),textSize: width*(0.015)),
-    PreOrderDateTextField(totalWidth: width*(0.22),textSize: width*(0.015)),
+    // PreOrderDateTextField(totalWidth: width*(0.22),textSize: width*(0.015)),
           ],
         ),
         SizedBox(height: 10,),

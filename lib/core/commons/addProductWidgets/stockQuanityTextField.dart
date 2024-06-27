@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../theme/pallete.dart';
 
 class StockQuantityTextField extends StatefulWidget {
-  const StockQuantityTextField({super.key,required this.totalWidth,required this.textSize});
+  const StockQuantityTextField({super.key,required this.totalWidth,required this.textSize,required this.stockQuantityController});
   final double totalWidth;
   final double textSize;
+  final TextEditingController stockQuantityController;
 
   @override
   State<StockQuantityTextField> createState() => _StockQuantityTextFieldState();
 }
 
 class _StockQuantityTextFieldState extends State<StockQuantityTextField> {
-  TextEditingController stockQuantityController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,9 +24,15 @@ class _StockQuantityTextFieldState extends State<StockQuantityTextField> {
           width:widget.totalWidth,
           height: 50,
           child: TextFormField(
-            controller: stockQuantityController,
+            controller: widget.stockQuantityController,
             style:  GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),
-            keyboardType: TextInputType.text,
+            keyboardType:
+            const TextInputType.numberWithOptions(
+                decimal: true),
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.allow(
+                  RegExp(r'^(\d+)?\.?\d{0,2}'))
+            ],
             decoration: InputDecoration(
               enabledBorder:const OutlineInputBorder(
                 borderSide:  BorderSide(

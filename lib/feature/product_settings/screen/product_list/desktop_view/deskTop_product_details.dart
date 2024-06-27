@@ -4,11 +4,13 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:managment_system/core/global_variables/global_variables.dart';
 import 'package:managment_system/feature/product_settings/screen/product_list/desktop_view/product_details_laptop.dart';
+import 'package:managment_system/model/product_model.dart';
 
 import '../../../../../core/theme/pallete.dart';
 
 class DeskTopProductDetails extends StatefulWidget {
-  const DeskTopProductDetails({super.key});
+  const DeskTopProductDetails({super.key,required this.productModel});
+  final ProductModel productModel;
 
   @override
   State<DeskTopProductDetails> createState() => _DeskTopProductDetailsState();
@@ -17,6 +19,7 @@ class DeskTopProductDetails extends StatefulWidget {
 class _DeskTopProductDetailsState extends State<DeskTopProductDetails> {
   @override
   Widget build(BuildContext context) {
+    final product=widget.productModel;
     return Scaffold(
       body: DefaultTabController(
         length: 4,
@@ -36,26 +39,26 @@ class _DeskTopProductDetailsState extends State<DeskTopProductDetails> {
                     SizedBox(width: width*(0.01),),
                     Text("Product Detail",style:GoogleFonts.poppins(fontSize:25,color: Pallete.blackColor,fontWeight: FontWeight.w500,)),
                     Spacer(),
-                    Container(
-                      color:Pallete.homeBackgroundColor ,
-                      height: 35,
-                      width: 35,
-                      child: Icon(Icons.mail_outline),
-                    ),
-                    SizedBox(width: 20,),
-                    Container(
-                      color:Pallete.homeBackgroundColor ,
-                      height: 35,
-                      width: 35,
-                      child: Icon(Icons.notifications_active_outlined),
-                    ),
-                    SizedBox(width: 20,),
-                    CircleAvatar(
-                      backgroundColor: Pallete.homeBackgroundColor,
-                      radius: 17,
-                    ),
-                    SizedBox(width: 5,),
-                    Text("Admin",style: GoogleFonts.poppins(fontSize:14,color: Pallete.blackColor,fontWeight:FontWeight.w400),),
+                    // Container(
+                    //   color:Pallete.homeBackgroundColor ,
+                    //   height: 35,
+                    //   width: 35,
+                    //   child: Icon(Icons.mail_outline),
+                    // ),
+                    // SizedBox(width: 20,),
+                    // Container(
+                    //   color:Pallete.homeBackgroundColor ,
+                    //   height: 35,
+                    //   width: 35,
+                    //   child: Icon(Icons.notifications_active_outlined),
+                    // ),
+                    // SizedBox(width: 20,),
+                    // CircleAvatar(
+                    //   backgroundColor: Pallete.homeBackgroundColor,
+                    //   radius: 17,
+                    // ),
+                    // SizedBox(width: 5,),
+                    // Text("Admin",style: GoogleFonts.poppins(fontSize:14,color: Pallete.blackColor,fontWeight:FontWeight.w400),),
                   ],
                 ),
                 const SizedBox(height: 30,),
@@ -78,7 +81,7 @@ class _DeskTopProductDetailsState extends State<DeskTopProductDetails> {
                                     width: width*(0.45),
                                     height: height*(0.24),
                                     color: Pallete.backgroundColor,
-                                    child: Image.asset("assets/logo/Rectangle 41.png",
+                                    child: Image.network(product.images[0],
                                     fit: BoxFit.fill,),
                                   ),
                                   SizedBox(height: height*(0.008),),
@@ -87,7 +90,7 @@ class _DeskTopProductDetailsState extends State<DeskTopProductDetails> {
                                     height: height*(0.15),
                                     width: width*(0.45),
                                     child: ListView.builder(
-                                      itemCount: 4,
+                                      itemCount: product.images.length-1,
                                         physics: const NeverScrollableScrollPhysics(),
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder:(context, index) {
@@ -97,7 +100,7 @@ class _DeskTopProductDetailsState extends State<DeskTopProductDetails> {
                                               width: width*(0.088),
                                               height: height*(0.13),
                                               color: Pallete.backgroundColor,
-                                              child: Image.asset("assets/logo/Rectangle 42.png",
+                                              child: Image.network(product.images[index+1],
                                                 fit: BoxFit.fill,),
                                             ),
                                           );
@@ -124,8 +127,8 @@ class _DeskTopProductDetailsState extends State<DeskTopProductDetails> {
                                       maxHeight: height*(0.06),
                                     ),
                                       width: width*(0.26),
-                                      child: Text("Apple Macbook",style:GoogleFonts.poppins(fontSize:width*(0.01),color: Pallete.blackColor,fontWeight: FontWeight.w500,))),
-                                  Text("AED 5,600.00",style:GoogleFonts.poppins(fontSize:width*(0.01),color: Pallete.blackColor,fontWeight: FontWeight.w500,)),
+                                      child: Text(product.productTitle,style:GoogleFonts.poppins(fontSize:width*(0.01),color: Pallete.blackColor,fontWeight: FontWeight.w500,))),
+                                  Text("${product.currencyType} ${product.sellingPrice}",style:GoogleFonts.poppins(fontSize:width*(0.01),color: Pallete.blackColor,fontWeight: FontWeight.w500,)),
                                 Row(
                                   children: [
                                     CircleAvatar(
@@ -145,7 +148,7 @@ class _DeskTopProductDetailsState extends State<DeskTopProductDetails> {
                                       maxHeight:height*(0.1), // Optional: Constrain max width
                                     ),
                                     width: width*(0.26),
-                                    child: Text("Lorem Ipsumis simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's",style:
+                                    child: Text(product.message,style:
                                     GoogleFonts.poppins(fontSize:width*(0.008),color: Pallete.blackColor,fontWeight: FontWeight.w400,)),
                                   ),
                                   Divider(color: Pallete.textFieldBorderColor,),
@@ -166,7 +169,7 @@ class _DeskTopProductDetailsState extends State<DeskTopProductDetails> {
                                           children: [
                                             Text("Availability",style: GoogleFonts.poppins(fontSize:width*(0.009),color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
                                             Text(" :  ",style: GoogleFonts.poppins(fontSize:width*(0.009),color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
-                                            Text("In Stock",style: GoogleFonts.poppins(fontSize:width*(0.009),color:Pallete.textGreenColor,fontWeight: FontWeight.w400,),),
+                                            Text(product.status,style: GoogleFonts.poppins(fontSize:width*(0.009),color:Pallete.textGreenColor,fontWeight: FontWeight.w400,),),
                                           ],
                                         ),
                                         Row(

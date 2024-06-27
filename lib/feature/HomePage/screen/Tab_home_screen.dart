@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:managment_system/feature/HomePage/screen/side_menu.dart';
 import 'package:managment_system/feature/product_settings/screen/add_product/add_product_screen.dart';
+import 'package:managment_system/feature/product_settings/screen/deleted_product/deleted_product.dart';
 import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
 import '../../DashBoard/screen/dashboard_screen.dart';
+import '../../office/screen/manager/manager_screen.dart';
 import '../../product_settings/screen/product_list/product_list.dart';
 
 class TabHomeScreen extends ConsumerWidget {
@@ -39,12 +41,8 @@ class TabHomeScreen extends ConsumerWidget {
             physics: const NeverScrollableScrollPhysics(),
             controller: tabController,
             children:   [
-              DashBoardScreen(),
-              Container(
-                color: Colors.blue,
-                width: 1024,
-                height: 800,
-              ),
+              DashBoardScreen(device: false,),
+              ManagerScreen(device: false,),
               Container(
                 color: Colors.lightGreen,
                 width: 1024,
@@ -82,11 +80,11 @@ class TabHomeScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(8.0),
             child: ProductList(tabController: tabController,device: false,),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DeletedProductList(tabController: tabController,device: false,),
+          ),
               Container(
-                color: Colors.black,
-                width: 1024,
-                height: 800,
-              ), Container(
                 color: Colors.green,
                 width: 1024,
                 height: 800,

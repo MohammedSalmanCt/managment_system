@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class CategoryModel{
   final String categoryName;
   final String id;
+  final String adminId;
   final DocumentReference? reference;
   final bool delete;
   final List<String> search;
@@ -14,6 +15,7 @@ class CategoryModel{
   const CategoryModel({
     required this.categoryName,
     required this.id,
+    required this.adminId,
     this.reference,
     required this.delete,
     required this.search,
@@ -26,6 +28,7 @@ class CategoryModel{
   CategoryModel copyWith({
     String? categoryName,
     String? id,
+    String? adminId,
     DocumentReference? reference,
     bool? delete,
     List<String>? search,
@@ -36,6 +39,7 @@ class CategoryModel{
     return CategoryModel(
       categoryName: categoryName ?? this.categoryName,
       id: id ?? this.id,
+      adminId: adminId ?? this.adminId,
       reference: reference ?? this.reference,
       delete: delete ?? this.delete,
       search: search ?? this.search,
@@ -49,6 +53,7 @@ class CategoryModel{
     return {
       'categoryName': categoryName,
       'id': id,
+      'adminId': adminId,
       'reference': reference,
       'delete': delete,
       'search': search,
@@ -62,6 +67,7 @@ class CategoryModel{
     return CategoryModel(
       categoryName: map['categoryName'] ??"",
       id: map['id'] ??"",
+      adminId: map['adminId'] ??"",
       reference: map['reference'] as DocumentReference,
       delete: map['delete']??"",
       search:List<String>.from((map['search']),),

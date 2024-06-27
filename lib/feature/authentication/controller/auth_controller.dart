@@ -20,8 +20,6 @@ class AuthController extends Notifier<bool>{
   AuthRepository get _authRepository => ref.read(authRepositoryProvider);
 /// sign in Admin
   signInAdmin({required String email,required String password,required BuildContext context}) async {
-    print("ssssssssssssss$email");
-    print("ssssssssssssss$password");
     final admin = await _authRepository.signInAdmin(email: email, password: password);
     admin.fold((l) => showSnackBar(context,'Invalid Email/Password or Admin No Longer Exist'), (adminModel) async {
       ref.read(adminProvider.notifier).update(adminModel);

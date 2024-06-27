@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import '../../global_variables/global_variables.dart';
 import '../../theme/pallete.dart';
 
 class PublishDateAndTime extends StatefulWidget {
@@ -13,22 +14,7 @@ class PublishDateAndTime extends StatefulWidget {
 }
 
 class _PublishDateAndTimeState extends State<PublishDateAndTime> {
-  final datePickProvider = StateProvider<DateTime?>((ref) {
-return null;
-  });
-  /// date pick
-  Future<void> _selectedToDate(
-      {required BuildContext context, required WidgetRef ref}) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2035, 8));
-    if (picked != null && picked != ref.read(datePickProvider)) {
-      ref.read(datePickProvider.notifier).update((state) =>
-          DateTime(picked.year, picked.month, picked.day, 23, 59, 59));
-    }
-  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,7 +25,7 @@ return null;
           final date=ref.watch(datePickProvider);
           return InkWell(
             onTap: () {
-              _selectedToDate(context: context, ref: ref);
+              selectedToDate(context: context, ref: ref,text: "Publish Date & Time");
             },
             child: Container(
               height: 50,
@@ -49,9 +35,10 @@ return null;
                   border: Border.all(color: Pallete.textFieldBorderColor)
               ),
               child: Center(
-                child: Text(date!=null?DateFormat('dd/MM/yyyy')
-                    .format(date):"",
-                  style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400),),
+                child: date!=null?Text(DateFormat('dd/MM/yyyy')
+                    .format(date),
+                  style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400),)
+               : Icon(Icons.calendar_month,color: Pallete.blackColor,),
               ),
             ),
           );

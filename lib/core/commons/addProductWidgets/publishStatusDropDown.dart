@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../global_variables/global_variables.dart';
 import '../../theme/pallete.dart';
 
 class PublishStatusDropDown extends StatelessWidget {
@@ -9,9 +10,7 @@ class PublishStatusDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final publishStatusProvider = StateProvider<String?>((ref) {
-      return null;
-    });
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -53,8 +52,8 @@ class PublishStatusDropDown extends StatelessWidget {
                     .update((state) => newValue);
               },
               items: <String>[
-                'Toys & Games',
-                'Electronics',
+                'In Stock',
+                'OutOfStock',
               ].map<DropdownMenuItem<String>>(
                       (String value) {
                     return DropdownMenuItem<String>(

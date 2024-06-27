@@ -10,6 +10,7 @@ import '../../../model/admin_model.dart';
 import '../../HomePage/screen/home_screen.dart';
 import '../controller/auth_controller.dart';
 import 'login_screen.dart';
+
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
@@ -53,7 +54,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: height*0.6,
+                height: height*0.5,
                 width: 400,
                 child: SvgPicture.asset(AssetConstants.logo,fit: BoxFit.fill,)
               ),

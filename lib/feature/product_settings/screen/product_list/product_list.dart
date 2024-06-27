@@ -1,7 +1,14 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:managment_system/core/commons/error.dart';
+import 'package:managment_system/core/commons/loader.dart';
+import 'package:managment_system/core/constants/asset_constants.dart';
+import 'package:managment_system/feature/authentication/controller/auth_controller.dart';
+import 'package:managment_system/feature/product_settings/controller/product_controller.dart';
 import 'package:managment_system/feature/product_settings/screen/product_list/desktop_view/desktopProductList.dart';
 import 'package:managment_system/feature/product_settings/screen/product_list/tablet_view/tabProduct_list.dart';
 import '../../../../../core/theme/pallete.dart';
@@ -17,7 +24,12 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
+  /// product search controller
   TextEditingController searchController=TextEditingController();
+  final productSearchProvider = StateProvider<String>((ref) {
+return "";
+  });
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -30,16 +42,22 @@ class _ProductListState extends State<ProductList> {
               Consumer(
                 builder:(context, ref, child) {
                   return SizedBox(
-                    width:200,
+                    width:350,
                     height: 30,
                     child: TextFormField(
                       controller: searchController,
                       style:  GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            searchController.clear();
+                            ref.read(productSearchProvider.notifier).update((state) => "");
+                          },
+                            child: Icon(Icons.clear,color: Pallete.textFieldBorderColor,)),
                         fillColor: Pallete.whiteColor,
                         labelText: "Search...",
-                        labelStyle:GoogleFonts.poppins(color: Pallete.textGreyColor,fontWeight: FontWeight.w400,fontSize:10),
+                        labelStyle:GoogleFonts.poppins(color: Pallete.textGreyColor,fontWeight: FontWeight.w400,fontSize:15),
                         enabledBorder:const OutlineInputBorder(
                           borderSide:  BorderSide(
                               color: Pallete.textFieldBorderColor),
@@ -54,6 +72,9 @@ class _ProductListState extends State<ProductList> {
                         ),
                         contentPadding:const EdgeInsetsDirectional.only(top: 8,start: 10),
                       ),
+                      onChanged: (value) {
+                        ref.read(productSearchProvider.notifier).update((state) => value);
+                      },
                     ),
                   );
                 }, ),
@@ -61,7 +82,7 @@ class _ProductListState extends State<ProductList> {
                 builder: (context,ref,child) {
                   return InkWell(
                     onTap: () {
-                      widget.tabController.animateTo(5);
+                      widget.tabController.animateTo(7);
                       ref.read(selectedSideMenuIndexProvider.notifier).update((state) => 5);
                       ref.read(selectedSideMenuSubIndexProvider.notifier).update((state) => 1);
                       ref.read(headingProvider.notifier).update((state) => "Add Product");
@@ -78,8 +99,29 @@ class _ProductListState extends State<ProductList> {
             ],
           ),
           SizedBox(height: 5,),
-        widget.device? DeskTopProductList()
-            :TabViewProductList()
+       Consumer(builder: (context, ref, child) {
+        final admin= ref.watch(adminProvider);
+         Map map={
+           "adminId":admin?.id,
+           "search":ref.watch(productSearchProvider),
+           "delete":false,
+         };
+         return ref.watch(getProductsProvider(jsonEncode(map))).when(data: (products) {
+            if(products.isNotEmpty){
+           return widget.device? DeskTopProductList(products: products,delete: false,tabController: widget.tabController,)
+               :TabViewProductList(products: products, delete: false,tabController: widget.tabController,);
+         }
+            else{
+            return  Center(
+                child: Lottie.asset(AssetConstants.noData),
+              );
+            }
+         }, error: (error, stackTrace) {
+           print(error);
+           return ErrorText(error: error.toString());
+         },
+             loading: () => Loader(),);
+       },)
         ],
       ),
     );

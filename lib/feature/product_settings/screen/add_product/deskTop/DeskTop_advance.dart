@@ -12,9 +12,15 @@ import 'advance/deskTopShipping.dart';
 import 'advance/desktopAdditional_options.dart';
 
 class DeskTopAdvance extends StatefulWidget {
-  const DeskTopAdvance({super.key,required this.device,required this.tabController});
+  const DeskTopAdvance({super.key,required this.device,required this.tabController,
+    required this.skuController,required this.stockQuantityController,required this.additionalDescription,
+  required this.additionalTagTitle});
   final bool device;
   final TabController tabController;
+final TextEditingController skuController;
+final TextEditingController stockQuantityController;
+final TextEditingController additionalDescription;
+final TextEditingController additionalTagTitle;
 
   @override
   State<DeskTopAdvance> createState() => _DeskTopAdvanceState();
@@ -58,9 +64,11 @@ class _DeskTopAdvanceState extends State<DeskTopAdvance> {
             child: TabBarView(
               controller: widget.tabController,
               physics: const NeverScrollableScrollPhysics(),
-              children:const [
-              DeskTopInventory(),
-                DeskTopAdditionalOption(),
+              children: [
+              DeskTopInventory(stockQuantityController: widget.stockQuantityController,
+              skuController: widget.skuController,),
+                DeskTopAdditionalOption(additionalDescription: widget.additionalDescription,
+                additionalTagTitle: widget.additionalTagTitle,),
                 // DeskTopShipping(),
             ],),
           )
@@ -69,9 +77,11 @@ class _DeskTopAdvanceState extends State<DeskTopAdvance> {
            child: TabBarView(
              controller: widget.tabController,
              physics: const NeverScrollableScrollPhysics(),
-             children:const [
-               TabViewInventory(),
-               TabViewAdditionalOption(),
+             children: [
+               TabViewInventory(stockQuantityController: widget.stockQuantityController,
+                 skuController: widget.skuController,),
+               TabViewAdditionalOption(additionalDescription: widget.additionalDescription,
+                 additionalTagTitle: widget.additionalTagTitle,),
                // TabViewShipping(),
              ],),
          ),

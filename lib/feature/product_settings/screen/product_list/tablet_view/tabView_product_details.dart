@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:managment_system/model/product_model.dart';
 import '../../../../../core/global_variables/global_variables.dart';
 import '../../../../../core/theme/pallete.dart';
 import '../desktop_view/product_details_laptop.dart';
 
 class TabViewProductDetails extends StatefulWidget {
-  const TabViewProductDetails({super.key});
+  const TabViewProductDetails({super.key,required this.productModel});
+  final ProductModel productModel;
 
   @override
   State<TabViewProductDetails> createState() => _TabViewProductDetailsState();
@@ -16,6 +18,7 @@ class TabViewProductDetails extends StatefulWidget {
 class _TabViewProductDetailsState extends State<TabViewProductDetails> {
   @override
   Widget build(BuildContext context) {
+    final product=widget.productModel;
     return SafeArea(child:
     Scaffold(
       appBar: AppBar(
@@ -44,14 +47,14 @@ class _TabViewProductDetailsState extends State<TabViewProductDetails> {
                             margin: EdgeInsets.all(width*(0.01)),
                             width: width*(0.3),
                             color: Pallete.backgroundColor,
-                            child: Image.asset("assets/logo/Rectangle 41.png",
+                            child: Image.network(product.images[0],
                               fit: BoxFit.fill,),
                           ),
                           Container(
                             width: width*(0.635),
                             margin: EdgeInsets.all(width*(0.01)),
                             child:  ListView.builder(
-                                              itemCount: 4,
+                                              itemCount: product.images.length-1,
                                               physics: const NeverScrollableScrollPhysics(),
                                               scrollDirection: Axis.horizontal,
                                               itemBuilder:(context, index) {
@@ -60,7 +63,7 @@ class _TabViewProductDetailsState extends State<TabViewProductDetails> {
                                                   child: Container(
                                                     width: width*(0.151),
                                                     color: Pallete.backgroundColor,
-                                                    child: Image.asset("assets/logo/Rectangle 42.png",
+                                                    child: Image.network(product.images[index+1],
                                                       fit: BoxFit.fill,),
                                                   ),
                                                 );
@@ -90,10 +93,10 @@ class _TabViewProductDetailsState extends State<TabViewProductDetails> {
                                     maxHeight: height*(0.06),
                                   ),
                                   width: width*(0.5),
-                                              child: Text("Apple Macbook",
+                                              child: Text(product.productTitle,
                                                   style:GoogleFonts.poppins(fontSize:width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w500,))),
                                           Spacer(),
-                                          Text("AED 5,600.00",style:GoogleFonts.poppins(fontSize:width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w500,)),
+                                          Text("${product.currencyType} ${product.sellingPrice}",style:GoogleFonts.poppins(fontSize:width*(0.015),color: Pallete.blackColor,fontWeight: FontWeight.w500,)),
 
                                   ],
                                 ),
@@ -116,7 +119,7 @@ class _TabViewProductDetailsState extends State<TabViewProductDetails> {
                                                 maxHeight:height*(0.08), // Optional: Constrain max width
                                               ),
                                               width: width*(0.71),
-                                              child: Text("Lorem Ipsumis simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's",style:
+                                              child: Text(product.message,style:
                                               GoogleFonts.poppins(fontSize:width*(0.01),color: Pallete.blackColor,fontWeight: FontWeight.w400,)),
                                             ),
                                             Divider(color: Pallete.textFieldBorderColor,),
@@ -137,7 +140,7 @@ class _TabViewProductDetailsState extends State<TabViewProductDetails> {
                                                     children: [
                                                       Text("Availability",style: GoogleFonts.poppins(fontSize:width*(0.012),color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
                                                       Text(" :  ",style: GoogleFonts.poppins(fontSize:width*(0.012),color: Pallete.blackColor,fontWeight: FontWeight.w400,),),
-                                                      Text("In Stock",style: GoogleFonts.poppins(fontSize:width*(0.012),color:Pallete.textGreenColor,fontWeight: FontWeight.w400,),),
+                                                      Text(product.status,style: GoogleFonts.poppins(fontSize:width*(0.012),color:Pallete.textGreenColor,fontWeight: FontWeight.w400,),),
                                                     ],
                                                   ),
                                                   Row(

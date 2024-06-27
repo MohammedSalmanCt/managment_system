@@ -5,7 +5,9 @@ import 'package:managment_system/core/commons/addProductWidgets/specificTags.dar
 import 'package:managment_system/core/global_variables/global_variables.dart';
 
 class DeskTopAdditionalOption extends StatefulWidget {
-  const DeskTopAdditionalOption({super.key});
+  const DeskTopAdditionalOption({super.key,required this.additionalTagTitle,required this.additionalDescription});
+  final TextEditingController additionalTagTitle;
+  final TextEditingController additionalDescription;
 
   @override
   State<DeskTopAdditionalOption> createState() => _DeskTopAdditionalOptionState();
@@ -20,13 +22,13 @@ class _DeskTopAdditionalOptionState extends State<DeskTopAdditionalOption> {
       children: [
         Row(
           children: [
-            AdditionalTagTitleTextField(totalWidth: width*(0.2),),
-            Spacer(),
-            SpecificTagContainer(totalWidth: width*(0.2),tagTextSize: width*(0.008),tagContainerSize: width*(0.044),)
+            AdditionalTagTitleTextField(totalWidth: width*(0.2),additionalTagTitle: widget.additionalTagTitle,),
+            // Spacer(),
+            // SpecificTagContainer(totalWidth: width*(0.2),tagTextSize: width*(0.008),tagContainerSize: width*(0.044),)
           ],
         ),
         SizedBox(height: 10,),
-        AdditionalDescriptionTextField(totalWidth: width*(0.4)),
+        AdditionalDescriptionTextField(totalWidth: width*(0.4),additionalDescription: widget.additionalDescription,),
         SizedBox(height: 10,),
 
       ],

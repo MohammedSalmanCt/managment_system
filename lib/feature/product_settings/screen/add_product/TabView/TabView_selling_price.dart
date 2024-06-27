@@ -7,7 +7,9 @@ import '../../../../../core/commons/addProductWidgets/selling_price_typeOf_disco
 import '../../../../../core/global_variables/global_variables.dart';
 
 class TabViewSellingPrice extends StatefulWidget {
-  const TabViewSellingPrice({super.key});
+  const TabViewSellingPrice({super.key,required this.initialCost,required this.sellingPrice,});
+  final TextEditingController initialCost;
+  final TextEditingController sellingPrice;
 
   @override
   State<TabViewSellingPrice> createState() => _TabViewSellingPriceState();
@@ -20,13 +22,13 @@ class _TabViewSellingPriceState extends State<TabViewSellingPrice> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 20,),
-        InitialCostTextField(totalWidth: width*(0.5),),
+        InitialCostTextField(totalWidth: width*(0.5),initialCost: widget.initialCost,),
         SizedBox(height: 20,),
-        SellingPriceTextField(totalWidth: width*(0.5),),
+        SellingPriceTextField(totalWidth: width*(0.5),sellingPrice: widget.sellingPrice,),
         SizedBox(height: 20,),
         ChooseCurrencyDropDown(totalWidth: width*(0.5),),
-        SizedBox(height: 20,),
-        ProductStockTextField(totalWidth: width*(0.5),),
+        // SizedBox(height: 20,),
+        // ProductStockTextField(totalWidth: width*(0.5),productStock: widget.productStock,),
         SizedBox(height: 20,),
         SellingPriceTypeOfDiscount(textSize: width*(0.012),
           gridContainerSize: width*(0.008),

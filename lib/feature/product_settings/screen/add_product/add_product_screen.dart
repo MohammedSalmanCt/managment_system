@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:managment_system/core/constants/firebase_constants.dart';
+import 'package:managment_system/core/commons/search.dart';
+import 'package:managment_system/core/utils.dart';
+import 'package:managment_system/feature/authentication/controller/auth_controller.dart';
+import 'package:managment_system/feature/product_settings/controller/product_controller.dart';
 import 'package:managment_system/feature/product_settings/screen/add_product/deskTop/DeskTop_selling_price.dart';
 import 'package:managment_system/feature/product_settings/screen/add_product/deskTop/product_category.dart';
 import 'package:managment_system/feature/product_settings/screen/add_product/product_gallery.dart';
-import 'package:managment_system/model/admin_model.dart';
+import 'package:managment_system/model/product_model.dart';
 import '../../../../core/commons/addProductWidgets/nextButton.dart';
 import '../../../../core/commons/addProductWidgets/prevButton.dart';
 import '../../../../core/global_variables/global_variables.dart';
@@ -55,7 +58,47 @@ class _AddProductScreenState extends State<AddProductScreen> with SingleTickerPr
   ];
   /// advance section tabController
   TabController? tabController;
+  clear({required WidgetRef ref}){
+    stockQuantityController.clear();
+    skuController.clear();
+    initialCost.clear();
+    productTitle.clear();
+    productDescription.clear();
+    sellingPrice.clear();
+    additionalTagTitle.clear();
+    additionalDescription.clear();
+    ref.read(selectCategoryIdProvider.notifier).update((state) =>null);
+    ref.read(selectCategoryNameProvider.notifier).update((state) => null);
+    ref.read(selectSubCategoryNameProvider.notifier).update((state)=> null);
+    ref.read(selectSubCategoryIdProvider.notifier).update((state) => null);
+    ref.read(restockDateProvider.notifier).update((state) => null);
+    ref.read(stockAvailabilityProvider.notifier).update((state) => null);
+    ref.read(typeDiscountProvider.notifier).update((state) => null);
+    ref.read(currencyProvider.notifier).update((state) => null);
+    ref.read(datePickProvider.notifier).update((state) => null);
+    ref.read(publishStatusProvider.notifier).update((state)=>null);
+    ref.read(publishStatusProvider.notifier).update((state) => null);
+    ref.read(imagePickProvider.notifier).update((state) => []);
+  }
 
+  /// add product
+  addProduct({required BuildContext context,required ProductModel productModel,required WidgetRef ref,})
+{
+  final images=ref.read(imagePickProvider);
+ ref.watch(productControllerProvider.notifier).addProduct(productModel: productModel, context: context,images: images);
+ clear(ref: ref);
+}
+/// edit product
+  editProduct({required BuildContext context,required ProductModel productModel,required WidgetRef ref,})
+{
+ ref.watch(productControllerProvider.notifier).editProduct(productModel: productModel, context: context);
+ clear(ref: ref);
+  ref.read(productModelProvider.notifier).update((state) => null);
+}
+  /// add product page provider
+  final addProductPageProvider = StateProvider((ref) {
+    return 0;
+  });
   @override
   void initState() {
     tabController=TabController(length:2, vsync: this);
@@ -67,6 +110,7 @@ class _AddProductScreenState extends State<AddProductScreen> with SingleTickerPr
     return Consumer(
       builder: (context,ref,child) {
         final addProductPageIndex=ref.watch(addProductPageProvider);
+       final admin= ref.watch(adminProvider);
         print(addProductPageIndex);
         return Container(
           height: 500,
@@ -151,19 +195,28 @@ class _AddProductScreenState extends State<AddProductScreen> with SingleTickerPr
                   children: [
                     addProductPageIndex==0 ?SizedBox(
                       child:  widget.device?AddProductDetails(hintTextSize:width*(0.008),productDetailsTextFieldHeight: 200,
-                        textFontSize: width*(0.01),device: widget.device,)
+                        textFontSize: width*(0.01),device: widget.device,productDescription: productDescription,productTitle: productTitle,)
                           :AddProductDetails(hintTextSize: width*(0.015),device: widget.device,
-                        textFontSize: width*(0.02),productDetailsTextFieldHeight: 300,),
+                        textFontSize: width*(0.02),productDetailsTextFieldHeight: 300,productTitle: productTitle,
+                      productDescription: productDescription,),
                     )
                         : addProductPageIndex==1? SizedBox(
                         child: widget.device?AddProductCategory()
                             :TabViewProductCategory()):
                     addProductPageIndex==2?SizedBox(
-                      child: widget.device?DeskTopSellingPrice()
-                      :TabViewSellingPrice(),
+                      child: widget.device?DeskTopSellingPrice(
+                      sellingPrice: sellingPrice,
+                      initialCost: initialCost,)
+                      :TabViewSellingPrice(
+                        sellingPrice: sellingPrice,
+                        initialCost: initialCost,),
                     )
                     :addProductPageIndex==3?SizedBox(
-                      child: DeskTopAdvance(device: widget.device,tabController: tabController!,)
+                      child: DeskTopAdvance(device: widget.device,tabController: tabController!,
+                      additionalDescription: additionalDescription,
+                      additionalTagTitle: additionalTagTitle,
+                      skuController: skuController,
+                      stockQuantityController: stockQuantityController,)
                     )
                     :ProductGallery(device: widget.device,),
                     SizedBox(height: 20,),
@@ -198,21 +251,214 @@ class _AddProductScreenState extends State<AddProductScreen> with SingleTickerPr
                               if(addProductPageIndex<4){
                               if (addProductPageIndex == 3 &&
                                   tabController!.index < 1) {
-                                tabController
-                                    ?.animateTo(tabController!.index + 1);
+                                if(ref.watch(stockAvailabilityProvider)==null)
+                                {
+                                  showSnackBar(context, "Please Choose Stock Availability");
+                                }
+                                else if(skuController.text.isEmpty){
+                                  showSnackBar(context, "Please Add SKU code");
+                                }
+                                else if(stockQuantityController.text.isEmpty){
+                                  showSnackBar(context, "Please Add Stock Quantity");
+                                }
+                                else if(stockQuantityController.text=="0"){
+                                  showSnackBar(context, "Please Enter Valid Stock Quantity");
+                                }
+                                else if(ref.watch(restockDateProvider)==null){
+                                  showSnackBar(context, "Please Choose Restock Date");
+                                }
+                                else{
+                                  tabController
+                                      ?.animateTo(tabController!.index + 1);
+                                }
                               } else {
-                                ref
-                                    .read(addProductPageProvider.notifier)
-                                    .update((state) => addProductPageIndex + 1);
-                                print(addProductPageIndex);
+                                if(addProductPageIndex==0)
+                                  {
+                                    if(productTitle.text.isEmpty)
+                                      {
+                                        showSnackBar(context, "Please Add Product Title");
+                                      }
+                                    else if(productDescription.text.isEmpty){
+                                      showSnackBar(context, "Please Add Message");
+                                    }
+                                    else{
+                                      ref
+                                          .read(addProductPageProvider.notifier)
+                                          .update((state) => addProductPageIndex + 1);
+                                    }
+                                  }
+                                else if(addProductPageIndex==1){
+                                  if(ref.watch(selectCategoryIdProvider)==null)
+                                  {
+                                    showSnackBar(context, "Please Add Category");
+                                  }
+                                  else if(ref.watch(selectSubCategoryIdProvider)==null){
+                                    showSnackBar(context, "Please Add SubCategory");
+                                  }else if(ref.watch(publishStatusProvider)==null){
+                                    showSnackBar(context, "Please Choose Status");
+                                  }else if(ref.watch(datePickProvider)==null){
+                                    showSnackBar(context, "Please Choose Date");
+                                  }
+                                  else{
+                                    ref
+                                        .read(addProductPageProvider.notifier)
+                                        .update((state) => addProductPageIndex + 1);
+                                  }
+                                }
+                                else if(addProductPageIndex==2){
+                                  if(initialCost.text.isEmpty)
+                                  {
+                                    showSnackBar(context, "Please Add Initial Cost");
+                                  }
+                                 else if(initialCost.text=="0")
+                                  {
+                                    showSnackBar(context, "Please Enter Valid Initial Cost");
+                                  }
+                                  else if(sellingPrice.text.isEmpty){
+                                    showSnackBar(context, "Please Add Selling Price");
+                                  }
+                                  else if(sellingPrice.text=="0"){
+                                    showSnackBar(context, "Please Enter Valid SellingPrice");
+                                  }
+                                  else if(ref.watch(currencyProvider)==null){
+                                    showSnackBar(context, "Please Choose Currency");
+                                  }
+                                  else{
+                                    ref
+                                        .read(addProductPageProvider.notifier)
+                                        .update((state) => addProductPageIndex + 1);
+                                  }
+                                }
+                                else if(addProductPageIndex==3){
+                                    ref
+                                        .read(addProductPageProvider.notifier)
+                                        .update((state) => addProductPageIndex + 1);
+                                }
                               }
                             }
-                              else{
-                                widget.tabController.animateTo(4);
-                                ref.read(selectedSideMenuIndexProvider.notifier).update((state) => 4);
-                                ref.read(selectedSideMenuSubIndexProvider.notifier).update((state) => 2);
-                                ref.read(headingProvider.notifier).update((state) => "Product List");
+                                else {
+                                  if(ref.watch(headingProvider)=="Add Product")
+                                    {
+                                      print("add product");
+                                      if(ref.watch(imagePickProvider).isEmpty)
+                                      {
+                                        showSnackBar(context, "Please Add Images");
+                                      }
+                                    else  {
+                                  final discountType =
+                                      ref.read(typeDiscountProvider);
+                                  ProductModel productModel = ProductModel(
+                                      productTitle: productTitle.text.trim(),
+                                      message: productDescription.text.trim(),
+                                      categoryId:
+                                          ref.read(selectCategoryIdProvider)!,
+                                      currencyType: ref.read(currencyProvider)!,
+                                      id: "",
+                                      subCategoryId: ref
+                                          .read(selectSubCategoryIdProvider)!,
+                                      adminId: admin!.id,
+                                      delete: false,
+                                      search: setSearchParam(
+                                          "${productTitle.text.trim().toUpperCase()} ${ref.read(selectCategoryNameProvider)}"
+                                          "${ref.read(selectSubCategoryNameProvider)}"),
+                                      createdTime: DateTime.now(),
+                                      publishDate: ref.read(datePickProvider)!,
+                                      restockDate:
+                                          ref.read(restockDateProvider)!,
+                                      images: [],
+                                      status: ref.read(publishStatusProvider)!,
+                                      initialCost:
+                                          double.parse(initialCost.text.trim()),
+                                      sellingPrice: double.parse(
+                                          sellingPrice.text.trim()),
+                                      productStock: "",
+                                      discountType: discountType ?? "",
+                                      stockAvailability:
+                                          ref.read(stockAvailabilityProvider)!,
+                                      lowStock: "",
+                                      sku: skuController.text.trim(),
+                                      stockQuantity: double.parse(
+                                          stockQuantityController.text.trim()),
+                                      discount: 0,
+                                      additionalTagTitle:
+                                          additionalTagTitle.text.trim(),
+                                      specificTag: "",
+                                      additionalDescription:
+                                          additionalDescription.text.trim());
+                                  addProduct(
+                                      context: context,
+                                      productModel: productModel,
+                                      ref: ref);
+                                }
                               }
+                                  else{
+                                    print("edit prodocy");
+                                    if(ref.watch(productEditImageListProvider).isEmpty)
+                                    {
+                                      showSnackBar(context, "Please Add Images");
+                                    }
+                                    else{
+                                      final product=ref.read(productModelProvider)!;
+                                  ProductModel productModel = ProductModel(
+                                      productTitle: productTitle.text.trim(),
+                                      message: productDescription.text.trim(),
+                                      categoryId:
+                                          ref.read(selectCategoryIdProvider)!,
+                                      currencyType: ref.read(currencyProvider)!,
+                                      id: product.id,
+                                      subCategoryId: ref
+                                          .read(selectSubCategoryIdProvider)!,
+                                      adminId: admin!.id,
+                                      delete: false,
+                                      search: setSearchParam(
+                                          "${productTitle.text.trim().toUpperCase()} ${ref.read(selectCategoryNameProvider)}"
+                                          "${ref.read(selectSubCategoryNameProvider)}"),
+                                      createdTime: DateTime.now(),
+                                      publishDate: ref.read(datePickProvider)!,
+                                      restockDate:
+                                          ref.read(restockDateProvider)!,
+                                      images: ref
+                                          .read(productEditImageListProvider),
+                                      status: ref.read(publishStatusProvider)!,
+                                      initialCost:
+                                          double.parse(initialCost.text.trim()),
+                                      sellingPrice: double.parse(
+                                          sellingPrice.text.trim()),
+                                      productStock: "",
+                                      discountType:
+                                          ref.read(typeDiscountProvider)!,
+                                      stockAvailability:
+                                          ref.read(stockAvailabilityProvider)!,
+                                      lowStock: "",
+                                      sku: skuController.text.trim(),
+                                      stockQuantity: double.parse(
+                                          stockQuantityController.text.trim()),
+                                      discount: 0,
+                                      additionalTagTitle:
+                                          additionalTagTitle.text.trim(),
+                                      specificTag: "",
+                                      additionalDescription:
+                                          additionalDescription.text.trim(),
+                                  reference: product.reference);
+                                  editProduct(
+                                      context: context,
+                                      productModel: productModel,
+                                      ref: ref);
+                                }
+                                widget.tabController.animateTo(8);
+                                ref
+                                    .read(
+                                        selectedSideMenuIndexProvider.notifier)
+                                    .update((state) => 5);
+                                ref
+                                    .read(selectedSideMenuSubIndexProvider
+                                        .notifier)
+                                    .update((state) => 2);
+                                ref
+                                    .read(headingProvider.notifier)
+                                    .update((state) => "Product List");
+                              }
+                            }
                           },
                             child: NextButton(device: widget.device,text: addProductPageIndex==4?"Submit":"Next",))
                       ],

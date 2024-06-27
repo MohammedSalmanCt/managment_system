@@ -47,6 +47,8 @@ dependencies:
   google_fonts: ^6.2.1
   dotted_line: ^3.2.2
   image_picker: ^1.1.2
+  lottie: ^3.1.2
+
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +76,7 @@ flutter:
   assets:
     - assets/loginScreen/
     - assets/logo/
+    - assets/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

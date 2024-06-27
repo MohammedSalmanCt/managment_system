@@ -6,6 +6,7 @@ class ProductModel{
   final String categoryId;
   final String id;
   final String subCategoryId;
+  final String adminId;
   final DocumentReference? reference;
   final bool delete;
   final List<String> search;
@@ -26,6 +27,7 @@ class ProductModel{
   final String additionalTagTitle;
   final String specificTag;
   final String additionalDescription;
+  final String currencyType;
 
 
 //<editor-fold desc="Data Methods">
@@ -37,6 +39,7 @@ class ProductModel{
     required this.categoryId,
     required this.id,
     required this.subCategoryId,
+    required this.adminId,
     this.reference,
     required this.delete,
     required this.search,
@@ -56,6 +59,7 @@ class ProductModel{
     required this.discount,
     required this.additionalTagTitle,
     required this.specificTag,
+    required this.currencyType,
     required this.additionalDescription,
   });
 
@@ -63,6 +67,7 @@ class ProductModel{
     String? productTitle,
     String? message,
     String? categoryId,
+    String? adminId,
     String? id,
     String? subCategoryId,
     DocumentReference? reference,
@@ -85,11 +90,13 @@ class ProductModel{
     String? additionalTagTitle,
     String? specificTag,
     String? additionalDescription,
+    String? currencyType,
   }) {
     return ProductModel(
       productTitle: productTitle ?? this.productTitle,
       message: message ?? this.message,
       categoryId: categoryId ?? this.categoryId,
+      adminId: adminId ?? this.adminId,
       id: id ?? this.id,
       subCategoryId: subCategoryId ?? this.subCategoryId,
       reference: reference ?? this.reference,
@@ -111,6 +118,7 @@ class ProductModel{
       discount: discount ?? this.discount,
       additionalTagTitle: additionalTagTitle ?? this.additionalTagTitle,
       specificTag: specificTag ?? this.specificTag,
+      currencyType: currencyType ?? this.currencyType,
       additionalDescription: additionalDescription ??
           this.additionalDescription,
     );
@@ -124,6 +132,7 @@ class ProductModel{
       'categoryId': categoryId,
       'id': id,
       'subCategoryId': subCategoryId,
+      'adminId': adminId,
       'reference': reference,
       'delete': delete,
       'search': search,
@@ -136,6 +145,7 @@ class ProductModel{
       'sellingPrice': sellingPrice,
       'productStock': productStock,
       'discountType': discountType,
+      'currencyType': currencyType,
       'stockAvailability': stockAvailability,
       'lowStock': lowStock,
       'sku': sku,
@@ -154,6 +164,7 @@ class ProductModel{
       categoryId: map['categoryId']??"",
       id: map['id']??"",
       subCategoryId: map['subCategoryId']??"",
+      adminId: map['adminId']??"",
       reference: map['reference'] as DocumentReference,
       delete: map['delete'] ??false,
       search:List<String>.from((map['search']),),
@@ -172,6 +183,7 @@ class ProductModel{
       stockQuantity: map['stockQuantity']??0,
       discount: map['discount']??0,
       additionalTagTitle: map['additionalTagTitle']??"",
+      currencyType: map['currencyType']??"",
       specificTag: map['specificTag']??"",
       additionalDescription: map['additionalDescription']??"",
     );

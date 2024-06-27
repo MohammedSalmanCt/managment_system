@@ -6,7 +6,9 @@ import 'package:managment_system/feature/HomePage/screen/side_menu.dart';
 import '../../../core/global_variables/global_variables.dart';
 import '../../../core/theme/pallete.dart';
 import '../../DashBoard/screen/dashboard_screen.dart';
+import '../../office/screen/manager/manager_screen.dart';
 import '../../product_settings/screen/add_product/add_product_screen.dart';
+import '../../product_settings/screen/deleted_product/deleted_product.dart';
 import '../../product_settings/screen/product_list/product_list.dart';
 
 class DeskTopHomeScreen extends StatelessWidget {
@@ -31,23 +33,24 @@ class DeskTopHomeScreen extends StatelessWidget {
                         child:Column(
                           children: [
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(heading,style:GoogleFonts.poppins(fontSize:25,color: Pallete.blackColor,fontWeight: FontWeight.w500,)),
-                                Spacer(),
-                                Container(
-                                  color:Pallete.homeBackgroundColor ,
-                                  height: 35,
-                                  width: 35,
-                                  child: Icon(Icons.mail_outline),
-                                ),
-                                SizedBox(width: 20,),
-                                Container(
-                                  color:Pallete.homeBackgroundColor ,
-                                  height: 35,
-                                  width: 35,
-                                  child: Icon(Icons.notifications_active_outlined),
-                                ),
-                                SizedBox(width: 20,),
+                            //     Text(heading,style:GoogleFonts.poppins(fontSize:25,color: Pallete.blackColor,fontWeight: FontWeight.w500,)),
+                            //     Spacer(),
+                            //     Container(
+                            //       color:Pallete.homeBackgroundColor ,
+                            //       height: 35,
+                            //       width: 35,
+                            //       child: Icon(Icons.mail_outline),
+                            //     ),
+                            //     SizedBox(width: 20,),
+                            //     Container(
+                            //       color:Pallete.homeBackgroundColor ,
+                            //       height: 35,
+                            //       width: 35,
+                            //       child: Icon(Icons.notifications_active_outlined),
+                            //     ),
+                            //     SizedBox(width: 20,),
                                 CircleAvatar(
                                   backgroundColor: Pallete.homeBackgroundColor,
                                   radius: 17,
@@ -64,12 +67,8 @@ class DeskTopHomeScreen extends StatelessWidget {
                                   controller: tabController,
                                   physics: NeverScrollableScrollPhysics(),
                                   children:   [
-                                    DashBoardScreen(),
-                                Container(
-                                  color: Colors.blue,
-                                  width: 1024,
-                                  height: 800,
-                                ),
+                                    DashBoardScreen(device: true,),
+                                    ManagerScreen(device: true,),
                                     Container(
                                   color: Colors.lightGreen,
                                   width: 1024,
@@ -105,11 +104,8 @@ class DeskTopHomeScreen extends StatelessWidget {
                                     textSize: width*(0.01),
                                     textSubSize: width*(0.008),),
                                     ProductList(tabController: tabController,device: true,),
+                                    DeletedProductList(tabController: tabController,device: true,),
                                     Container(
-                                  color: Colors.black,
-                                  width: 1024,
-                                  height: 800,
-                                ), Container(
                                   color: Colors.green,
                                   width: 1024,
                                   height: 800,

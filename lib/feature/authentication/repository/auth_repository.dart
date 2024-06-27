@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
@@ -21,10 +19,7 @@ class AuthRepository{
   /// sign in Admin
   FutureEither<AdminModel> signInAdmin({required String email,required String password}) async {
     try{
-         AdminModel adminModel=await getAdmin(email: email, password: password);
-      // print("object");
-      // print(adminModel.email);
-      // print(adminModel.password);
+      AdminModel adminModel = await getAdmin(password: password, email: email);
       if(adminModel.email == email && adminModel.password == password){
         return right(adminModel);
       }
@@ -43,11 +38,11 @@ class AuthRepository{
     }
   }
 /// get Admin checking
-  getAdmin({required String email,required String password}) async {
-    print("qqqqqqqqqqqqqqqqqqqqqqq");
+  Future<AdminModel> getAdmin({required String email,required String password}) async {
     var adminSnapshot = await  _admin.where('email',isEqualTo: email)
         .where("delete",isEqualTo: false)
         .where('password',isEqualTo: password).get();
+
     DocumentSnapshot admin = adminSnapshot.docs.first;
     AdminModel adminModel = AdminModel.fromMap(admin.data() as Map<String,dynamic>);
     return adminModel;

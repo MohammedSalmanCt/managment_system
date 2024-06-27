@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../global_variables/global_variables.dart';
 import '../../theme/pallete.dart';
 
 class ChooseCurrencyDropDown extends StatelessWidget {
@@ -9,9 +10,6 @@ class ChooseCurrencyDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currencyProvider = StateProvider<String?>((ref) {
-      return null;
-    });
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

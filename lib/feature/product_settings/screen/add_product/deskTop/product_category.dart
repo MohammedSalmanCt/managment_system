@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:managment_system/core/global_variables/global_variables.dart';
 import '../../../../../core/commons/addProductWidgets/addCategoryDropDown.dart';
-import '../../../../../core/commons/addProductWidgets/addTagContainer.dart';
+import '../../../../../core/commons/addProductWidgets/addSubCategoryContainer.dart';
 import '../../../../../core/commons/addProductWidgets/createCategoryButton.dart';
 import '../../../../../core/commons/addProductWidgets/publishDateAndTime.dart';
 import '../../../../../core/commons/addProductWidgets/publishStatusDropDown.dart';
@@ -28,16 +28,30 @@ class _AddProductCategoryState extends State<AddProductCategory> {
          children: [
            AddCategoryDropDwn(totalWidth: width*(0.2),),
            Spacer(),
-           AddTagContainer(totalWidth: width*(0.2),tagTextSize: width*(0.008),tagContainerSize: width*(0.044),)
+           AddSubCategoryContainer(totalWidth: width*(0.2),tagTextSize: width*(0.008),tagContainerSize: width*(0.044),)
          ],
        ),
         SizedBox(height: 20,),
-        Consumer(
-          builder: (context,ref,child) {
-            return CreateCategoryButton(onTap: (){
-              addCategoryAlertBox(context: context,ref: ref);
-            },);
-          }
+        Row(
+          children: [
+            Consumer(
+                builder: (context,ref,child) {
+                  return CreateCategoryButton(onTap: (){
+                    addCategoryAlertBox(context: context,ref: ref,text: "Category");
+                  },
+                  text: "New Category",);
+                }
+            ),
+            Spacer(),
+            Consumer(
+                builder: (context,ref,child) {
+                  return CreateCategoryButton(onTap: (){
+                    addCategoryAlertBox(context: context,ref: ref,text: "SubCategory");
+                  },
+                  text: "SubCategory",);
+                }
+            ),
+          ],
         ),
         SizedBox(height: 20,),
         Row(

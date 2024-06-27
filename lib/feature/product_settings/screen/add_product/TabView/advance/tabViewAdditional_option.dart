@@ -5,7 +5,9 @@ import 'package:managment_system/core/commons/addProductWidgets/specificTags.dar
 import 'package:managment_system/core/global_variables/global_variables.dart';
 
 class TabViewAdditionalOption extends StatefulWidget {
-  const TabViewAdditionalOption({super.key});
+  const TabViewAdditionalOption({super.key,required this.additionalDescription,required this.additionalTagTitle});
+  final TextEditingController additionalTagTitle;
+  final TextEditingController additionalDescription;
 
   @override
   State<TabViewAdditionalOption> createState() => _TabViewAdditionalOptionState();
@@ -17,11 +19,11 @@ class _TabViewAdditionalOptionState extends State<TabViewAdditionalOption> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AdditionalTagTitleTextField(totalWidth: width*(0.5),),
+        AdditionalTagTitleTextField(totalWidth: width*(0.5),additionalTagTitle: widget.additionalTagTitle,),
         SizedBox(height: 20,),
         SpecificTagContainer(totalWidth: width*(0.5),tagContainerSize: width*(0.08),tagTextSize: width*(0.01)),
         SizedBox(height: 20,),
-        AdditionalDescriptionTextField(totalWidth: width*(0.5)),
+        AdditionalDescriptionTextField(totalWidth: width*(0.5),additionalDescription: widget.additionalDescription,),
         SizedBox(height: 20,),
       ],
     );

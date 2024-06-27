@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import '../../../../../core/commons/addProductWidgets/addCategoryDropDown.dart';
-import '../../../../../core/commons/addProductWidgets/addTagContainer.dart';
+import '../../../../../core/commons/addProductWidgets/addSubCategoryContainer.dart';
 import '../../../../../core/commons/addProductWidgets/createCategoryButton.dart';
 import '../../../../../core/commons/addProductWidgets/publishDateAndTime.dart';
 import '../../../../../core/commons/addProductWidgets/publishStatusDropDown.dart';
@@ -17,9 +17,11 @@ class TabViewProductCategory extends StatelessWidget {
         SizedBox(height: 20,),
         AddCategoryDropDwn(totalWidth: width*(0.5),),
         SizedBox(height: 20,),
-        AddTagContainer(totalWidth: width*(0.5),tagContainerSize: width*(0.1),tagTextSize: width*(0.015),),
+        AddSubCategoryContainer(totalWidth: width*(0.5),tagContainerSize: width*(0.1),tagTextSize: width*(0.015),),
         SizedBox(height: 20,),
-        CreateCategoryButton(onTap: (){},),
+        CreateCategoryButton(onTap: (){},text: "New Category",),
+        SizedBox(height: 20,),
+        CreateCategoryButton(onTap: (){},text: "SubCategory",),
         SizedBox(height: 20,),
         PublishStatusDropDown(totalWidth: width*(0.5),),
         SizedBox(height: 20,),

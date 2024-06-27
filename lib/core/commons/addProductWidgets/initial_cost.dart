@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../theme/pallete.dart';
 
 class InitialCostTextField extends StatefulWidget {
-  const InitialCostTextField({super.key,required this.totalWidth});
+  const InitialCostTextField({super.key,required this.totalWidth,required this.initialCost});
   final double totalWidth;
+  final TextEditingController initialCost;
 
   @override
   State<InitialCostTextField> createState() => _InitialCostTextFieldState();
 }
 
 class _InitialCostTextFieldState extends State<InitialCostTextField> {
-  TextEditingController initialCost=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,9 +23,15 @@ class _InitialCostTextFieldState extends State<InitialCostTextField> {
           width:widget.totalWidth,
           height: 50,
           child: TextFormField(
-            controller: initialCost,
+            controller: widget.initialCost,
             style:  GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),
-            keyboardType: TextInputType.text,
+            keyboardType:
+            const TextInputType.numberWithOptions(
+                decimal: true),
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.allow(
+                  RegExp(r'^(\d+)?\.?\d{0,2}'))
+            ],
             decoration: InputDecoration(
               enabledBorder:const OutlineInputBorder(
                 borderSide:  BorderSide(

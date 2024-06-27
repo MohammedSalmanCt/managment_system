@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../global_variables/global_variables.dart';
 import '../../theme/pallete.dart';
 
 class StockAvailabilityDropDown extends StatelessWidget {
@@ -9,10 +10,7 @@ class StockAvailabilityDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// stock availability provider
-    final stockAvailabilityProvider = StateProvider<String?>((ref) {
-      return null;
-    });
+
     return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -54,8 +52,8 @@ class StockAvailabilityDropDown extends StatelessWidget {
                     .update((state) => newValue);
               },
               items: <String>[
-                'stock 1',
-                'stock 2',
+                'Available',
+                'OutOfStock',
               ].map<DropdownMenuItem<String>>(
                       (String value) {
                     return DropdownMenuItem<String>(

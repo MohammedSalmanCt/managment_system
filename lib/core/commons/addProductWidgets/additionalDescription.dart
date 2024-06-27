@@ -5,15 +5,15 @@ import '../../global_variables/global_variables.dart';
 import '../../theme/pallete.dart';
 
 class AdditionalDescriptionTextField extends StatefulWidget {
-  const AdditionalDescriptionTextField({super.key,required this.totalWidth});
+  const AdditionalDescriptionTextField({super.key,required this.totalWidth,required this.additionalDescription});
   final double totalWidth;
+  final TextEditingController additionalDescription;
 
   @override
   State<AdditionalDescriptionTextField> createState() => _AdditionalDescriptionTextFieldState();
 }
 
 class _AdditionalDescriptionTextFieldState extends State<AdditionalDescriptionTextField> {
-  TextEditingController additionalTagTitle=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +24,7 @@ class _AdditionalDescriptionTextFieldState extends State<AdditionalDescriptionTe
           width:widget.totalWidth,
           height: 145,
           child: TextFormField(
-            controller: additionalTagTitle,
+            controller: widget.additionalDescription,
             style:  GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),
             keyboardType: TextInputType.text,
             maxLines: 10,

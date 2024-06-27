@@ -6,19 +6,19 @@ import '../../../../core/theme/pallete.dart';
 
 class AddProductDetails extends StatefulWidget {
   const AddProductDetails({super.key,required this.hintTextSize,required this.productDetailsTextFieldHeight,
+    required this.productTitle,required this.productDescription,
     required this.textFontSize,required this.device});
   final double textFontSize;
   final double productDetailsTextFieldHeight;
   final double hintTextSize;
   final bool device;
-
+  final TextEditingController productTitle;
+  final TextEditingController productDescription;
   @override
   State<AddProductDetails> createState() => _AddProductDetailsState();
 }
 
 class _AddProductDetailsState extends State<AddProductDetails> {
-  TextEditingController productTitle=TextEditingController();
-  TextEditingController productDescription=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -30,7 +30,7 @@ class _AddProductDetailsState extends State<AddProductDetails> {
           width: widget.device?width*(0.3):width*(0.5),
           height: 50,
           child: TextFormField(
-            controller: productTitle,
+            controller: widget.productTitle,
             style:  GoogleFonts.poppins(fontSize:widget.textFontSize,color: Pallete.blackColor,fontWeight: FontWeight.w400,),
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
@@ -55,7 +55,7 @@ class _AddProductDetailsState extends State<AddProductDetails> {
           width: widget.device?width*(0.3):width*(0.5),
           height: 200,
           child: TextFormField(
-            controller: productDescription,
+            controller: widget.productDescription,
             style:  GoogleFonts.poppins(fontSize:widget.textFontSize,color: Pallete.blackColor,fontWeight: FontWeight.w400,),
             keyboardType: TextInputType.text,
             maxLines: 10,

@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../global_variables/global_variables.dart';
 import '../../theme/pallete.dart';
 
 class SellingPriceTypeOfDiscount extends StatefulWidget {
@@ -29,10 +30,7 @@ class _SellingPriceTypeOfDiscountState extends State<SellingPriceTypeOfDiscount>
     // "Percentage-based Discount",
     // "Volume or Bulk Discount"
   ];
-  ///  type of product discount  provider
-  final typeDiscountProvider = StateProvider<String?>((ref) {
-    return null;
-  });
+
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -3,15 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../theme/pallete.dart';
 
 class ProductStockTextField extends StatefulWidget {
-  const ProductStockTextField({super.key,required this.totalWidth});
+  const ProductStockTextField({super.key,required this.totalWidth,required this.productStock});
   final double totalWidth;
+  final TextEditingController productStock;
 
   @override
   State<ProductStockTextField> createState() => _ProductStockTextFieldState();
 }
 
 class _ProductStockTextFieldState extends State<ProductStockTextField> {
-  TextEditingController productStock=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +23,7 @@ class _ProductStockTextFieldState extends State<ProductStockTextField> {
           width:widget.totalWidth,
           height: 50,
           child: TextFormField(
-            controller: productStock,
+            controller: widget.productStock,
             style:  GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400,),
             keyboardType: TextInputType.text,
             decoration: InputDecoration(

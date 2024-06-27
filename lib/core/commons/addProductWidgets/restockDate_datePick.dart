@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import '../../global_variables/global_variables.dart';
 import '../../theme/pallete.dart';
 
 class RestockDate extends StatefulWidget {
@@ -14,22 +15,6 @@ class RestockDate extends StatefulWidget {
 }
 
 class _RestockDateState extends State<RestockDate> {
-  final restockDateProvider = StateProvider<DateTime?>((ref) {
-    return null;
-  });
-  /// date pick
-  Future<void> _selectedToDate(
-      {required BuildContext context, required WidgetRef ref}) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2035, 8));
-    if (picked != null && picked != ref.read(restockDateProvider)) {
-      ref.read(restockDateProvider.notifier).update((state) =>
-          DateTime(picked.year, picked.month, picked.day, 23, 59, 59));
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,7 +25,7 @@ class _RestockDateState extends State<RestockDate> {
           final date=ref.watch(restockDateProvider);
           return InkWell(
             onTap: () {
-              _selectedToDate(context: context, ref: ref);
+              selectedToDate(context: context, ref: ref,text: "Restock Date");
             },
             child: Container(
               height: 50,
@@ -50,9 +35,10 @@ class _RestockDateState extends State<RestockDate> {
                   border: Border.all(color: Pallete.textFieldBorderColor)
               ),
               child: Center(
-                child: Text(date!=null?DateFormat('dd/MM/yyyy')
-                    .format(date):"",
-                  style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400),),
+                child: date!=null?Text(DateFormat('dd/MM/yyyy')
+                    .format(date),
+                  style: GoogleFonts.poppins(color: Pallete.blackColor,fontWeight: FontWeight.w400),)
+                :Icon(Icons.calendar_month,color: Pallete.blackColor,),
               ),
             ),
           );
